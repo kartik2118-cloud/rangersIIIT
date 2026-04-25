@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FestPass Organizer - Create New Fest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;450;500&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f3effc",
+                        "outline-variant": "#c8c4d8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-surface": "#1b1b24",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "primary-fixed": "#e3dfff",
+                        "surface-container-low": "#f6f2ff",
+                        "on-secondary-container": "#645a7d",
+                        "inverse-primary": "#c5c0ff",
+                        "surface-container-highest": "#e5e0ee",
+                        "on-secondary-fixed": "#1f1635",
+                        "inverse-surface": "#302f39",
+                        "tertiary-fixed": "#ffdf93",
+                        "on-primary-fixed": "#140067",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#5443df",
+                        "surface-dim": "#dcd8e5",
+                        "surface": "#fcf8ff",
+                        "secondary-fixed": "#e9ddff",
+                        "primary-container": "#6a5cf6",
+                        "on-primary-container": "#fefaff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#474555",
+                        "secondary-container": "#e1d4fd",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#503d00",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#c9a74d",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "surface-container-high": "#eae6f3",
+                        "on-primary-fixed-variant": "#3b22c8",
+                        "surface-bright": "#fcf8ff",
+                        "surface-variant": "#e5e0ee",
+                        "tertiary-fixed-dim": "#e7c265",
+                        "primary": "#513fdc",
+                        "on-background": "#1b1b24",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "secondary": "#63597c",
+                        "background": "#fcf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f0ecf9",
+                        "outline": "#787587",
+                        "tertiary": "#765b00",
+                        "on-tertiary-fixed-variant": "#594400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "256px",
+                        "header-height": "68px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-mono": ["IBM Plex Mono"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "450"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-slate-950 dark:bg-black border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+<div class="px-6 py-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-container to-primary flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div>
+<h1 class="text-xl font-extrabold text-white tracking-tighter">FestPass</h1>
+<p class="text-xs text-primary-container font-semibold tracking-wider uppercase">Organizer</p>
+</div>
+</div>
+<nav class="flex-1 mt-6 flex flex-col gap-1 px-3">
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<!-- Active State: Fests -->
+<a class="border-l-4 border-[#6A5CF6] bg-white/10 text-white font-semibold flex items-center px-6 py-3 transition-all rounded-r-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined mr-3 text-lg text-[#6A5CF6]" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+                Fests
+            </a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="storefront">storefront</span>
+                Merchants
+            </a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="payments">payments</span>
+                Payments
+            </a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="qr_code_2">qr_code_2</span>
+                QR Codes
+            </a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide mt-auto mb-4 hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar (Shared Component) -->
+<header class="sticky top-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/30 dark:border-white/10 shadow-sm flex items-center justify-between px-8 h-header-height">
+<div class="flex items-center gap-4">
+<div class="flex items-center text-slate-500 font-label-sm text-label-sm gap-2 uppercase">
+<span>Fests</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary-container font-semibold">Create New</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300 mr-4">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm cursor-pointer">
+<img alt="Organizer Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwuoibeuccZ2oNDjOI-DeZRsHHurNieTHC_vpIIRL28FLssIw5OH8gu34jipxMrQOkyfPHN10itfIAsGOvllOZfpB97jD-5BvLJQ53M4YGk08PU7xq01gt9WPq_zU2SlakcJAGoXC9QO2Yu5Xtd0lOjZj12y0ORsHO8csPZnRRIbJWsr4va4xvzLoekbM9o9Wccw0UmAEQob12ZZI-7oCflkQDV4rPDIfFaq7CSQZNpnHtBMjyTbNy31WU0cJOdvVjJ81lrEBtE3k"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-8 grid grid-cols-1 lg:grid-cols-12 gap-gutter max-w-7xl mx-auto w-full">
+<!-- Header Area -->
+<div class="lg:col-span-12 mb-2 flex items-end justify-between">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface">Create a New Fest</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Configure the core details and financial settlement for your upcoming event.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-label-sm text-label-sm text-on-surface-variant uppercase hover:bg-surface-variant transition-colors">Save Draft</button>
+<button class="px-6 py-2 rounded-lg bg-gradient-to-r from-primary-container to-primary font-label-sm text-label-sm text-white uppercase shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                        Publish Fest
+                    </button>
+</div>
+</div>
+<!-- Left Column: Form Card -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Fest Details Section -->
+<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-8">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed text-[20px]">stadium</span>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface">Fest Details</h2>
+</div>
+<div class="space-y-6">
+<!-- Name & Location Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="fest-name">Fest Name *</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline" id="fest-name" placeholder="e.g. Neon Nights 2024" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="location">Location Venue</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full h-12 pl-11 pr-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline" id="location" placeholder="Search venues..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Dates Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="start-date">Start Date &amp; Time *</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all" id="start-date" type="datetime-local"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="end-date">End Date &amp; Time</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all" id="end-date" type="datetime-local"/>
+</div>
+</div>
+<!-- Description -->
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="description">Event Description</label>
+<textarea class="w-full p-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline resize-none" id="description" placeholder="Describe the vibe, lineup, and essential details..." rows="4"></textarea>
+</div>
+</div>
+</div>
+<!-- Settlement & Visibility Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Settlement -->
+<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
+<div class="w-8 h-8 rounded bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed text-[20px]">account_balance</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface">Settlement</h3>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="wallet">Primary Wallet Address *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">account_balance_wallet</span>
+<input class="w-full h-11 pl-10 pr-3 rounded-md bg-surface-container-high border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container/50 font-data-mono text-data-mono text-on-surface outline-none transition-all placeholder:text-outline" id="wallet" placeholder="0x..." type="text"/>
+</div>
+<p class="text-xs text-outline mt-1 font-body-md">Funds from ticket sales will be routed here via smart contract.</p>
+</div>
+</div>
+<!-- Visibility -->
+<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
+<div class="w-8 h-8 rounded bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[20px]">visibility</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface">Visibility</h3>
+</div>
+<div class="space-y-3">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Status</label>
+<!-- Segmented Control -->
+<div class="flex bg-surface-container-high p-1 rounded-lg border border-outline-variant/30">
+<button class="flex-1 py-2 px-3 rounded-md bg-surface shadow-sm font-label-sm text-label-sm text-primary-container flex items-center justify-center gap-2 transition-all">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                                    Draft
+                                </button>
+<button class="flex-1 py-2 px-3 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-2 transition-all">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                    Live
+                                </button>
+<button class="flex-1 py-2 px-3 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-2 transition-all opacity-50 cursor-not-allowed">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                    Ended
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Help Panel -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-gradient-to-b from-surface-container-low to-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 overflow-hidden sticky top-[calc(68px+24px)]">
+<div class="h-32 relative bg-primary-container/10">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container/20 to-transparent"></div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-primary-container/10 rotate-12">help_center</span>
+<div class="absolute bottom-4 left-6">
+<h3 class="font-h3 text-h3 text-on-surface">Need Guidance?</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="mb-6">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">What is a Fest?</h4>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                                A "Fest" is the core container for your event. It holds all ticket tiers, associated merchants, and generates the unique smart contract for real-time payment settlement.
+                            </p>
+</div>
+<hr class="border-outline-variant/20 mb-6"/>
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-4">Frequently Asked</h4>
+<ul class="space-y-4">
+<li class="group cursor-pointer">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">Can I change the wallet later?</p>
+<p class="font-body-md text-sm text-on-surface-variant mt-1 hidden group-hover:block transition-all">Wallet changes require multi-sig approval once ticket sales begin to ensure security.</p>
+</div>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">When does it go Live?</p>
+</div>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">Adding Merchants</p>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/20">
+<a class="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-surface-container hover:bg-surface-variant border border-outline-variant/30 font-label-sm text-label-sm text-primary-container uppercase transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+                                View Full Docs
+                            </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
