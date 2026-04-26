@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuthUser } from '@/lib/auth';
-import { getUserById, isWalletCreated } from '@/lib/db';
+import { getUserById } from '@/lib/db';
 
 export async function GET() {
   const jwtUser = await getAuthUser();
@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ success: false, error: 'Not authenticated.' }, { status: 401 });
   }
 
-  const user = getUserById(jwtUser.userId);
+  const user = await getUserById(jwtUser.userId);
   if (!user) {
     return NextResponse.json({ success: false, error: 'User not found.' }, { status: 404 });
   }
@@ -21,7 +21,7 @@ export async function GET() {
       email: user.email,
       college: user.college,
       rollNumber: user.rollNumber,
-      walletCreated: isWalletCreated(user.id),
+      walletCreated: user.walletCreated,
       walletAddress: user.walletAddress,
       createdAt: user.createdAt,
     },

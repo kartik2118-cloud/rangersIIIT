@@ -15,12 +15,20 @@ interface UserProfile {
   createdAt: string;
 }
 
+import { auth, googleProvider } from '@/lib/firebase';
+import { signInWithPopup, signOut } from 'firebase/auth';
+
 export default function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [txCount, setTxCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  
+  // Edit Profile States
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({ college: '', rollNumber: '' });
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     fetch('/api/auth/me')
@@ -31,7 +39,7 @@ export default function ProfilePage() {
           return;
         }
         setUser(me.user);
-        // Fetch wallet and transactions in parallel
+        setEditForm({ college: me.user.college, rollNumber: me.user.rollNumber });
         return Promise.all([
           fetch('/api/wallet').then(r => r.json()).catch(() => ({ success: false })),
           fetch('/api/transactions').then(r => r.json()).catch(() => ({ success: false, data: [] })),
@@ -50,8 +58,43 @@ export default function ProfilePage() {
   }, [router]);
 
   async function handleLogout() {
-    await fetch('/api/auth/logout', { method: 'POST' });
+    try {
+      await signOut(auth); // Clear Firebase session
+    } catch (err) {
+      console.error('Firebase signout error', err);
+    }
+    await fetch('/api/auth/logout', { method: 'POST' }); // Clear JWT session
     router.push('/login');
+  }
+
+  async function handleGoogleLink() {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      alert('Google account successfully linked!');
+    } catch (err) {
+      alert('Failed to link Google account.');
+    }
+  }
+
+  async function handleSaveProfile() {
+    setSaving(true);
+    try {
+      const res = await fetch('/api/auth/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editForm),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setUser(prev => prev ? { ...prev, college: editForm.college, rollNumber: editForm.rollNumber } : null);
+        setIsEditing(false);
+      } else {
+        alert(data.error || 'Failed to update profile');
+      }
+    } catch (err) {
+      alert('Error updating profile');
+    }
+    setSaving(false);
   }
 
   if (loading) {
@@ -120,7 +163,17 @@ export default function ProfilePage() {
         </div>
 
         {/* Info Card */}
-        <h2 className="section-title" style={{ marginTop: '28px' }}>Student Information</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '28px' }}>
+          <h2 className="section-title" style={{ marginTop: 0 }}>Student Information</h2>
+          {!isEditing ? (
+            <button onClick={() => setIsEditing(true)} style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '13px', fontWeight: 500, cursor: 'pointer' }}>Edit</button>
+          ) : (
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button onClick={() => { setIsEditing(false); setEditForm({ college: user.college, rollNumber: user.rollNumber }); }} style={{ background: 'none', border: 'none', color: 'var(--text-2)', fontSize: '13px', fontWeight: 500, cursor: 'pointer' }}>Cancel</button>
+              <button onClick={handleSaveProfile} disabled={saving} style={{ background: 'var(--accent)', border: 'none', color: '#fff', fontSize: '13px', fontWeight: 500, cursor: 'pointer', padding: '4px 12px', borderRadius: '4px' }}>{saving ? 'Saving...' : 'Save'}</button>
+            </div>
+          )}
+        </div>
         <div className="profile-card">
           <div className="profile-field">
             <div className="profile-field-icon">
@@ -146,7 +199,11 @@ export default function ProfilePage() {
             </div>
             <div className="profile-field-content">
               <div className="profile-field-label">College</div>
-              <div className="profile-field-value">{user.college}</div>
+              {isEditing ? (
+                <input className="field-input" style={{ marginTop: '4px', padding: '6px 10px', fontSize: '14px' }} value={editForm.college} onChange={e => setEditForm({ ...editForm, college: e.target.value })} />
+              ) : (
+                <div className="profile-field-value">{user.college}</div>
+              )}
             </div>
           </div>
           <div className="profile-field">
@@ -155,7 +212,11 @@ export default function ProfilePage() {
             </div>
             <div className="profile-field-content">
               <div className="profile-field-label">Roll Number</div>
-              <div className="profile-field-value">{user.rollNumber}</div>
+              {isEditing ? (
+                <input className="field-input" style={{ marginTop: '4px', padding: '6px 10px', fontSize: '14px' }} value={editForm.rollNumber} onChange={e => setEditForm({ ...editForm, rollNumber: e.target.value })} />
+              ) : (
+                <div className="profile-field-value">{user.rollNumber}</div>
+              )}
             </div>
           </div>
           <div className="profile-field">
@@ -207,6 +268,10 @@ export default function ProfilePage() {
 
         {/* Actions */}
         <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px', paddingBottom: '24px' }}>
+          <button className="quick-btn" style={{ flexDirection: 'row', justifyContent: 'center', gap: '10px', width: '100%', border: '1px solid var(--border)' }} onClick={handleGoogleLink}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Link Google Account
+          </button>
           <button className="quick-btn" style={{ flexDirection: 'row', justifyContent: 'center', gap: '10px', width: '100%' }} onClick={() => router.push('/wallet')}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><circle cx="17" cy="15" r="1"/></svg>
             Go to Wallet

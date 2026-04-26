@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     // Simulate smart account creation delay
     await new Promise(r => setTimeout(r, 1500));
 
-    setWalletCreated(jwtUser.userId);
+    await setWalletCreated(jwtUser.userId);
 
     return NextResponse.json({ success: true });
   } catch {

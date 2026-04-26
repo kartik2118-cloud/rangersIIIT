@@ -1,13 +1,18 @@
-/**
- * Per-student in-memory database.
- * In production: replace with Supabase / PostgreSQL + Row Level Security.
- *
- * Data isolation: every wallet and every transaction is keyed by userId.
- * A student can ONLY read/write their own data.
- */
+import { createClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
 import { FESTS } from './store';
 import type { Transaction } from './store';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.warn('Missing Supabase Environment Variables');
+}
+
+export const supabase = createClient(supabaseUrl || 'http://localhost', supabaseServiceKey || 'anon', {
+  auth: { autoRefreshToken: false, persistSession: false }
+});
 
 // ── USER RECORD ──────────────────────────────────────────────────────────────
 export interface UserRecord {
@@ -17,19 +22,11 @@ export interface UserRecord {
   college: string;
   rollNumber: string;
   passwordHash: string;
-  createdAt: string;
-  // on-chain identity (simulated)
   walletAddress: string;
+  walletCreated: boolean;
   balance: number;
+  createdAt: string;
 }
-
-// ── IN-MEMORY STORE ──────────────────────────────────────────────────────────
-// userId → UserRecord
-const users = new Map<string, UserRecord>();
-// userId → transactions[]
-const userTxs = new Map<string, Transaction[]>();
-// userId → wallet created flag
-const walletCreated = new Set<string>();
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 function genId() {
@@ -41,128 +38,202 @@ function fakeWallet(email: string) {
   return `0x${hex}...${genId().slice(0, 4).toUpperCase()}`;
 }
 
-// Demo seed transactions for new users
-function seedTxs(userId: string, festName: string): Transaction[] {
+async function seedTxs(userId: string, festName: string) {
   const now = Date.now();
-  return [
+  const txs = [
     {
       id: 'seed_' + userId + '_1',
-      merchantId: 'mc-bytebites', merchantName: 'Byte Bites Café',
-      festId: 'fest-techvista', festName,
-      amount: 60, orderRef: 'ORD-SEED1', category: 'Food', icon: '🍔',
-      status: 'success', txHash: '0xseed1abc...',
+      user_id: userId,
+      merchant_id: 'mc-bytebites', merchant_name: 'Byte Bites Café',
+      fest_id: 'fest-techvista', fest_name: festName,
+      amount: 60, order_ref: 'ORD-SEED1', category: 'Food', icon: '🍔',
+      status: 'success', tx_hash: '0xseed1abc...',
       timestamp: new Date(now - 7200000).toISOString(),
     },
     {
       id: 'seed_' + userId + '_2',
-      merchantId: 'mc-ragakitchen', merchantName: 'Raga Kitchen',
-      festId: 'fest-resonance', festName: 'Resonance',
-      amount: 40, orderRef: 'ORD-SEED2', category: 'Food', icon: '☕',
-      status: 'success', txHash: '0xseed2def...',
+      user_id: userId,
+      merchant_id: 'mc-ragakitchen', merchant_name: 'Raga Kitchen',
+      fest_id: 'fest-resonance', fest_name: 'Resonance',
+      amount: 40, order_ref: 'ORD-SEED2', category: 'Food', icon: '☕',
+      status: 'success', tx_hash: '0xseed2def...',
       timestamp: new Date(now - 86400000).toISOString(),
     },
   ];
+  await supabase.from('transactions').insert(txs);
+}
+
+function mapUserRow(row: any): UserRecord {
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    college: row.college,
+    rollNumber: row.roll_number,
+    passwordHash: row.password_hash,
+    walletAddress: row.wallet_address,
+    walletCreated: row.wallet_created,
+    balance: Number(row.balance),
+    createdAt: row.created_at,
+  };
 }
 
 // ── WALLET CREATED STATE ─────────────────────────────────────────────────────
-export function isWalletCreated(userId: string): boolean {
-  return walletCreated.has(userId);
-}
-
-export function setWalletCreated(userId: string): void {
-  walletCreated.add(userId);
+export async function setWalletCreated(userId: string): Promise<void> {
+  await supabase.from('users').update({ wallet_created: true }).eq('id', userId);
 }
 
 // ── CRUD ─────────────────────────────────────────────────────────────────────
 export async function createUser(data: {
   name: string; email: string; college: string; rollNumber: string; password: string;
 }): Promise<UserRecord | { error: string }> {
-  // Check duplicate email
-  for (const u of Array.from(users.values())) {
-    if (u.email.toLowerCase() === data.email.toLowerCase()) return { error: 'Email already registered.' };
-  }
+  
+  const { data: existingUser } = await supabase.from('users').select('id').eq('email', data.email.toLowerCase()).single();
+  if (existingUser) return { error: 'Email already registered.' };
 
   const passwordHash = await bcrypt.hash(data.password, 10);
   const id = genId();
-  const user: UserRecord = {
+  
+  const newUser = {
     id,
     name: data.name,
     email: data.email.toLowerCase(),
     college: data.college,
-    rollNumber: data.rollNumber,
-    passwordHash,
-    createdAt: new Date().toISOString(),
-    walletAddress: fakeWallet(data.email),
-    balance: 500, // welcome bonus FEST tokens
+    roll_number: data.rollNumber,
+    password_hash: passwordHash,
+    wallet_address: fakeWallet(data.email),
+    wallet_created: false,
+    balance: 500,
   };
-  users.set(id, user);
-  userTxs.set(id, seedTxs(id, 'TechVista 2026'));
-  return user;
+
+  const { data: row, error } = await supabase.from('users').insert([newUser]).select().single();
+  if (error) return { error: error.message };
+
+  await seedTxs(id, 'TechVista 2026');
+  return mapUserRow(row);
 }
 
 export async function verifyCredentials(
   email: string, password: string
 ): Promise<UserRecord | null> {
-  for (const u of Array.from(users.values())) {
-    if (u.email === email.toLowerCase()) {
-      const ok = await bcrypt.compare(password, u.passwordHash);
-      return ok ? u : null;
-    }
+  const { data: user } = await supabase.from('users').select('*').eq('email', email.toLowerCase()).single();
+  if (!user) return null;
+
+  const ok = await bcrypt.compare(password, user.password_hash);
+  return ok ? mapUserRow(user) : null;
+}
+
+export async function getUserById(id: string): Promise<UserRecord | undefined> {
+  const { data: user } = await supabase.from('users').select('*').eq('id', id).single();
+  return user ? mapUserRow(user) : undefined;
+}
+
+export async function updateProfile(userId: string, data: { college: string; rollNumber: string }): Promise<boolean> {
+  const { error } = await supabase.from('users').update({
+    college: data.college,
+    roll_number: data.rollNumber
+  }).eq('id', userId);
+  return !error;
+}
+
+export async function findOrCreateFirebaseUser(
+  email: string, name: string, uid: string
+): Promise<UserRecord> {
+  const lowerEmail = email.toLowerCase();
+  const { data: existingUser } = await supabase.from('users').select('*').eq('email', lowerEmail).single();
+  
+  if (existingUser) {
+    return mapUserRow(existingUser);
   }
-  return null;
+
+  const id = genId();
+  const newUser = {
+    id,
+    name: name || 'Student',
+    email: lowerEmail,
+    college: 'Firebase Auth',
+    roll_number: uid.slice(0, 8),
+    password_hash: 'firebase_auth',
+    wallet_address: fakeWallet(lowerEmail),
+    wallet_created: false,
+    balance: 500,
+  };
+
+  const { data: row } = await supabase.from('users').insert([newUser]).select().single();
+  await seedTxs(id, 'TechVista 2026');
+  return row ? mapUserRow(row) : mapUserRow(newUser);
 }
 
-export function getUserById(id: string): UserRecord | undefined {
-  return users.get(id);
-}
-
-export function getUserWallet(userId: string) {
-  const u = users.get(userId);
-  if (!u) return null;
+export async function getUserWallet(userId: string) {
+  const { data: user } = await supabase.from('users').select('wallet_address, balance, name, college').eq('id', userId).single();
+  if (!user) return null;
   return {
-    address: u.walletAddress,
-    balance: u.balance,
-    studentName: u.name,
-    college: u.college,
+    address: user.wallet_address,
+    balance: Number(user.balance),
+    studentName: user.name,
+    college: user.college,
   };
 }
 
-export function getUserTxs(userId: string): Transaction[] {
-  return [...(userTxs.get(userId) || [])].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  );
+export async function getUserTxs(userId: string): Promise<Transaction[]> {
+  const { data: txs } = await supabase.from('transactions').select('*').eq('user_id', userId).order('timestamp', { ascending: false });
+  if (!txs) return [];
+  
+  return txs.map(tx => ({
+    id: tx.id,
+    merchantId: tx.merchant_id,
+    merchantName: tx.merchant_name,
+    festId: tx.fest_id,
+    festName: tx.fest_name,
+    amount: Number(tx.amount),
+    orderRef: tx.order_ref,
+    category: tx.category,
+    icon: tx.icon,
+    status: tx.status,
+    txHash: tx.tx_hash,
+    timestamp: tx.timestamp,
+  }));
 }
 
-export function processUserPayment(
+export async function processUserPayment(
   userId: string,
   params: { merchantId: string; festId: string; amount: number; orderRef: string }
-): { success: boolean; txHash: string; newBalance: number; error?: string } {
-  const user = users.get(userId);
-  if (!user) return { success: false, txHash: '', newBalance: 0, error: 'User not found.' };
-  if (user.balance < params.amount) return { success: false, txHash: '', newBalance: user.balance, error: 'Insufficient FEST balance.' };
+): Promise<{ success: boolean; txHash: string; newBalance: number; error?: string }> {
+  
+  const { data: user, error: userErr } = await supabase.from('users').select('balance').eq('id', userId).single();
+  if (userErr || !user) return { success: false, txHash: '', newBalance: 0, error: 'User not found.' };
+  
+  const currentBalance = Number(user.balance);
+  if (currentBalance < params.amount) return { success: false, txHash: '', newBalance: currentBalance, error: 'Insufficient FEST balance.' };
 
   const fest = FESTS.find(f => f.id === params.festId);
   const merchant = fest?.merchants.find(m => m.id === params.merchantId);
-  if (!fest || !merchant) return { success: false, txHash: '', newBalance: user.balance, error: 'Invalid fest or merchant.' };
+  if (!fest || !merchant) return { success: false, txHash: '', newBalance: currentBalance, error: 'Invalid fest or merchant.' };
 
   const txHash = '0x' + Math.random().toString(16).slice(2, 18);
-  user.balance -= params.amount;
+  const newBalance = currentBalance - params.amount;
+
+  const { error: updateErr } = await supabase.from('users').update({ balance: newBalance }).eq('id', userId);
+  if (updateErr) return { success: false, txHash: '', newBalance: currentBalance, error: 'Failed to update balance.' };
 
   const CAT_ICON: Record<string, string> = { Food: '🍔', Merch: '👕', Tickets: '🎟️', Games: '🎮' };
-  const newTx: Transaction = {
+  
+  const newTx = {
     id: 'tx_' + Date.now(),
-    merchantId: params.merchantId, merchantName: merchant.name,
-    festId: params.festId, festName: fest.name,
-    amount: params.amount, orderRef: params.orderRef,
+    user_id: userId,
+    merchant_id: params.merchantId,
+    merchant_name: merchant.name,
+    fest_id: params.festId,
+    fest_name: fest.name,
+    amount: params.amount,
+    order_ref: params.orderRef,
     category: merchant.category,
     icon: CAT_ICON[merchant.category] ?? '🛒',
-    status: 'success', txHash,
-    timestamp: new Date().toISOString(),
+    status: 'success',
+    tx_hash: txHash,
   };
 
-  const txList = userTxs.get(userId) || [];
-  txList.unshift(newTx);
-  userTxs.set(userId, txList);
+  await supabase.from('transactions').insert([newTx]);
 
-  return { success: true, txHash, newBalance: user.balance };
+  return { success: true, txHash, newBalance };
 }

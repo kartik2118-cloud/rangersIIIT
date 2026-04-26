@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     // Simulate blockchain confirmation delay
     await new Promise(r => setTimeout(r, 1200));
 
-    const result = processUserPayment(jwtUser.userId, { festId, merchantId, amount: Number(amount), orderRef });
+    const result = await processUserPayment(jwtUser.userId, { festId, merchantId, amount: Number(amount), orderRef });
 
     if (!result.success) {
       return NextResponse.json({ success: false, error: result.error }, { status: 400 });

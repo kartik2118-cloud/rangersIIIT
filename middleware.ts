@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAuthUserFromRequest } from '@/lib/auth';
 
 const PUBLIC_PAGES = ['/', '/login', '/register'];
-const PUBLIC_API = ['/api/auth/login', '/api/auth/register', '/api/fests'];
+const PUBLIC_API = ['/api/auth/login', '/api/auth/register', '/api/auth/firebase', '/api/fests'];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;

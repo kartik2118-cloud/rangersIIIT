@@ -2,6 +2,8 @@
 import { useRouter } from 'next/navigation';
 import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { auth, googleProvider } from '@/lib/firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 function LoginForm() {
   const router = useRouter();
@@ -38,43 +40,39 @@ function LoginForm() {
     }
   }
 
-  async function handleGoogleDemo(e: React.MouseEvent) {
+
+  async function handleGoogleLogin(e: React.MouseEvent) {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    // Demo: auto-register + login with a Google-like flow
-    const demoEmail = 'demo@iiit.ac.in';
-    const demoPass = 'demo1234';
+    try {
+      // 1. Authenticate with Firebase Google Provider
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
 
-    // Try login first
-    let res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: demoEmail, password: demoPass }),
-    });
-    let data = await res.json();
-
-    if (!data.success) {
-      // Register if not exists
-      res = await fetch('/api/auth/register', {
+      // 2. Send Firebase user data to our backend to issue FestPass JWT
+      const res = await fetch('/api/auth/firebase', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: 'Arjun Mehta',
-          email: demoEmail,
-          college: 'IIIT Hyderabad',
-          rollNumber: 'CS22B1045',
-          password: demoPass,
+          email: user.email,
+          name: user.displayName,
+          uid: user.uid,
         }),
       });
-      data = await res.json();
-    }
+      
+      const data = await res.json();
 
-    if (data.success) {
-      router.push(next);
-    } else {
-      setError(data.error || 'Demo login failed.');
+      if (data.success) {
+        router.push(next);
+      } else {
+        setError(data.error || 'Firebase login failed.');
+        setLoading(false);
+      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'Google sign-in failed.');
       setLoading(false);
     }
   }
@@ -117,7 +115,7 @@ function LoginForm() {
 
         <div className="auth-divider">or</div>
 
-        <button className="auth-social" onClick={handleGoogleDemo} disabled={loading}>
+        <button className="auth-social" onClick={handleGoogleLogin} disabled={loading}>
           <svg viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
