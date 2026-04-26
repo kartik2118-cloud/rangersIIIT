@@ -6,6 +6,10 @@ const { Server: SocketIO } = require("socket.io");
 
 const qrRoutes              = require("./routes/qr");
 const txRoutes              = require("./routes/transactions");
+const overviewRoutes        = require("./routes/overview");
+const festsRoutes           = require("./routes/fests");
+const merchantsRoutes       = require("./routes/merchants");
+const resolveUserRoutes     = require("./routes/resolveUser");
 const { startPaymentListener } = require("./paymentListener");
 
 const app    = express();
@@ -41,6 +45,10 @@ app.use(express.json());
 app.get("/health", (_req, res) => res.json({ ok: true, ts: Date.now() }));
 app.use("/api/qr",           qrRoutes);
 app.use("/api/transactions",  txRoutes);
+app.use("/api/overview",     overviewRoutes);   // Overview dashboard
+app.use("/api/fests",        festsRoutes);       // Fest management
+app.use("/api/merchants",    merchantsRoutes);   // Merchants page
+app.use("/api/resolve-user", resolveUserRoutes); // P2P username lookup
 
 // ─── Global error handler ─────────────────────────────────────────────────────
 // eslint-disable-next-line no-unused-vars

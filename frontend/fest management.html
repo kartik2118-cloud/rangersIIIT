@@ -13,6 +13,16 @@
       darkMode: "class",
       theme: {
         extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
           colors: {
             primary: "#97A97C",
             "primary-container": "#CFDBD5",
@@ -88,30 +98,16 @@
 <!-- Navigation Tabs -->
 <div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
 <!-- Overview (Inactive) -->
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">dashboard</span>
-                Overview
-            </a>
-<!-- Fests (Active) -->
-<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="#">
-<span class="material-symbols-outlined mr-3 text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
-                Fests
-            </a>
-<!-- Merchants (Inactive) -->
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">storefront</span>
-                Merchants
-            </a>
-<!-- Payments (Inactive) -->
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">payments</span>
-                Payments
-            </a>
-<!-- QR Codes (Inactive) -->
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">qr_code_2</span>
-                QR Codes
-            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="overview.html">
+<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">dashboard</span>Overview</a>
+<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="fest%20management.html">
+<span class="material-symbols-outlined mr-3 text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>Fests</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="merchants.html">
+<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">storefront</span>Merchants</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="revenue%20and%20settlement.html">
+<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">payments</span>Payments</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="QR%20code%20generator.html">
+<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">qr_code_2</span>QR Codes</a>
 </div>
 <!-- Settings (Bottom anchored) -->
 <div class="p-4 border-t border-white/5">
@@ -155,10 +151,10 @@
 <h1 class="font-h1 text-h1 text-on-surface">Fests</h1>
 <p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage your events, track performance, and coordinate merchants.</p>
 </div>
-<button class="bg-gradient-to-r from-primary to-purple-600 text-slate-800 font-label-sm text-label-sm uppercase px-6 py-3 rounded-2xl shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-95 flex items-center gap-2 w-fit">
-<span class="material-symbols-outlined text-[18px]">add</span>
-                    Create New Fest
-                </button>
+<a href="create%20%20new%20event.html" class="bg-primary text-white font-label-sm text-label-sm px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider w-fit">
+<span class="material-symbols-outlined mr-2 text-[18px]">add</span>
+                    Create Fest
+                </a>
 </div>
 <!-- Row 1: Stat Summary Cards (Bento style) -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
@@ -172,7 +168,7 @@
 </div>
 </div>
 <div>
-<span class="font-h2 text-h2 text-on-surface">12</span>
+<span class="font-h2 text-h2 text-on-surface" data-fest="total">12</span>
 <span class="font-body-md text-body-md text-emerald-600 ml-2 text-sm bg-emerald-50 px-2 py-0.5 rounded-full">+2 this month</span>
 </div>
 </div>
@@ -186,7 +182,7 @@
 </div>
 </div>
 <div>
-<span class="font-h2 text-h2 text-on-surface font-data-mono">₹1.42M</span>
+<span class="font-h2 text-h2 text-on-surface font-data-mono" data-fest="revenue">₹1.42M</span>
 <span class="font-body-md text-body-md text-emerald-600 ml-2 text-sm bg-emerald-50 px-2 py-0.5 rounded-full">+14.5%</span>
 </div>
 </div>
@@ -200,7 +196,7 @@
 </div>
 </div>
 <div>
-<span class="font-h2 text-h2 text-on-surface">348</span>
+<span class="font-h2 text-h2 text-on-surface" data-fest="merchants">348</span>
 <span class="font-body-md text-body-md text-on-surface-variant ml-2 text-sm">Across all fests</span>
 </div>
 </div>
@@ -208,7 +204,7 @@
 <!-- Row 2: Grid of Fest Cards -->
 <div class="mt-4">
 <h3 class="font-h3 text-h3 text-on-surface mb-6">Active &amp; Upcoming</h3>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter" id="fests-grid">
 <!-- Fest Card: Live -->
 <div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300">
 <div class="flex-1 flex border-l-4 border-l-primary">
@@ -316,4 +312,52 @@
 </div>
 </main>
 </div>
+<script>
+const API_BASE='http://localhost:4000/api';
+async function loadFests(){
+  try {
+    const fests = await fetch(API_BASE+'/fests').then(r=>r.json());
+    const stats = { total:fests.length, revenue:fests.reduce((s,f)=>s+(f.revenue||0),0), merchants:fests.reduce((s,f)=>s+(f.merchantCount||0),0) };
+    const el = n => document.querySelector(`[data-fest="${n}"]`);
+    if(el('total'))    el('total').textContent    = stats.total;
+    if(el('revenue'))  el('revenue').textContent  = '₹'+Number(stats.revenue/1000).toFixed(0)+'k';
+    if(el('merchants'))el('merchants').textContent = stats.merchants;
+    const grid = document.getElementById('fests-grid');
+    if(grid && fests.length) {
+      const statusBadge = s => s==='live'?'<span class="bg-primary-container text-slate-800 font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>Live</span>':
+        s==='upcoming'?'<span class="bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Upcoming</span>':
+        '<span class="bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Ended</span>';
+      const borderColor = s => s==='live'?'border-l-primary':s==='upcoming'?'border-l-secondary':'border-l-outline';
+      grid.innerHTML = fests.map(f=>`
+        <div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300">
+          <div class="flex-1 flex border-l-4 ${borderColor(f.status)}">
+            <div class="p-6 flex-1 flex flex-col gap-5">
+              <div class="flex justify-between items-start gap-4">
+                <div>
+                  <h4 class="font-h3 text-h3 text-on-surface">${f.name}</h4>
+                  <div class="flex items-center gap-3 mt-2 text-on-surface-variant">
+                    <div class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]">calendar_today</span>${f.start_date} – ${f.end_date}</div>
+                    <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+                    <div class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]">location_on</span>${f.location||'TBD'}</div>
+                  </div>
+                </div>
+                ${statusBadge(f.status)}
+              </div>
+              <div class="grid grid-cols-3 gap-4 py-4 border-y border-outline-variant/20">
+                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Revenue</p><p class="font-data-mono font-medium">₹${Number((f.revenue||0)/1000).toFixed(0)}k</p></div>
+                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Merchants</p><p class="font-data-mono font-medium">${f.merchantCount||0}</p></div>
+                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Transacts</p><p class="font-data-mono font-medium">${Number(f.transactionCount||0).toLocaleString()}</p></div>
+              </div>
+              <div class="flex items-center gap-3">
+<a href="merchants.html?fest_id=${f.id}" class="flex-1 flex justify-center items-center font-label-sm uppercase tracking-wide text-primary hover:bg-primary/5 py-2.5 rounded-2xl transition-colors border border-transparent">View Details</a>
+<a href="add%20merchant.html?fest_id=${f.id}" class="flex-1 flex justify-center items-center font-label-sm uppercase tracking-wide text-on-surface border border-outline hover:bg-surface-variant py-2.5 rounded-2xl transition-colors">Add Merchant</a>
+</div>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+  } catch(e){ console.warn('API fallback', e); }
+}
+loadFests();
+</script>
 </body></html>

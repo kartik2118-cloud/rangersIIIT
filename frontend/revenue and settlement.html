@@ -15,6 +15,16 @@
       darkMode: "class",
       theme: {
         extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
           colors: {
             primary: "#97A97C",
             "primary-container": "#CFDBD5",
@@ -82,30 +92,18 @@
 <p class=" text-sm tracking-wide text-primary">Organizer</p>
 </div>
 <div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4">dashboard</span>
-                Overview
-            </a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4">confirmation_number</span>
-                Fests
-            </a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4">storefront</span>
-                Merchants
-            </a>
-<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4" style="font-variation-settings: 'FILL' 1;">payments</span>
-                Payments
-            </a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4">qr_code_2</span>
-                QR Codes
-            </a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out  text-sm tracking-wide" href="#">
-<span class="material-symbols-outlined mr-4">settings</span>
-                Settings
-            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="overview.html">
+<span class="material-symbols-outlined mr-4">dashboard</span>Overview</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="fest%20management.html">
+<span class="material-symbols-outlined mr-4">confirmation_number</span>Fests</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="merchants.html">
+<span class="material-symbols-outlined mr-4">storefront</span>Merchants</a>
+<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="revenue%20and%20settlement.html">
+<span class="material-symbols-outlined mr-4" style="font-variation-settings: 'FILL' 1;">payments</span>Payments</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="QR%20code%20generator.html">
+<span class="material-symbols-outlined mr-4">qr_code_2</span>QR Codes</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined mr-4">settings</span>Settings</a>
 </div>
 </nav>
 <!-- Main Content Area -->
@@ -138,7 +136,7 @@
 <!-- Page Header -->
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 <h1 class="font-h1 text-h1 text-on-surface">All Transactions</h1>
-<button class="bg-surface-container border border-outline-variant/30 text-on-surface font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-variant transition-colors flex items-center gap-2 uppercase tracking-wider self-start sm:self-auto">
+<button onclick="exportDataToCSV('revenue')" class="bg-surface-container border border-outline-variant/30 text-on-surface font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-variant transition-colors flex items-center gap-2 uppercase tracking-wider self-start sm:self-auto">
 <span class="material-symbols-outlined text-[18px]">download</span>
                     Export CSV
                 </button>
@@ -151,7 +149,7 @@
 </div>
 <div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-1">Total Volume (FEST)</p>
-<p class="font-data-mono text-[24px] font-semibold text-on-surface">2,450,000</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-volume">2,450,000</p>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex items-center gap-4">
@@ -160,7 +158,7 @@
 </div>
 <div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-1">Transaction Count</p>
-<p class="font-data-mono text-[24px] font-semibold text-on-surface">14,239</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-count">14,239</p>
 </div>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex items-center gap-4">
@@ -169,7 +167,7 @@
 </div>
 <div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-1">Active Fests</p>
-<p class="font-data-mono text-[24px] font-semibold text-on-surface">3</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-fests">3</p>
 </div>
 </div>
 </div>
@@ -210,7 +208,7 @@
 <th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Tx Hash</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline-variant/20">
+<tbody class="divide-y divide-outline-variant/20" id="tx-table-body">
 <!-- Row 1 -->
 <tr class="hover:bg-[#F9F9FF] transition-colors group">
 <td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:32:01</td>
@@ -296,7 +294,7 @@
 </div>
 <!-- Pagination Footer -->
 <div class="border-t border-outline-variant/30 p-4 bg-surface-container-lowest flex items-center justify-between">
-<p class="font-body-md text-body-md text-on-surface-variant">Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">5</span> of <span class="font-semibold text-on-surface">14,239</span> results</p>
+<p class="font-body-md text-body-md text-on-surface-variant" id="paging-info">Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">5</span> of <span class="font-semibold text-on-surface">14,239</span> results</p>
 <div class="flex items-center gap-2">
 <button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
 <span class="material-symbols-outlined text-[18px]">chevron_left</span>
@@ -314,4 +312,58 @@
 </div>
 </main>
 </div>
+<script>
+const API_BASE='http://localhost:4000/api';
+let currentPage=1, totalCount=0;
+async function loadStats(){
+  try {
+    const s = await fetch(API_BASE+'/transactions/stats').then(r=>r.json());
+    const el = id => document.getElementById(id);
+    if(el('stat-volume'))  el('stat-volume').textContent  = Number(s.totalVolume).toLocaleString();
+    if(el('stat-count'))   el('stat-count').textContent   = Number(s.txCount).toLocaleString();
+    if(el('stat-fests'))   el('stat-fests').textContent   = s.activeFests;
+  } catch(e){ console.warn('stats fallback',e); }
+}
+async function loadTransactions(page=1, search='', status='', fest=''){
+  try {
+    const qs = new URLSearchParams({page,limit:20,...(search&&{search}),...(status&&status!=='All Statuses'&&{status:status.toLowerCase()}),...(fest&&fest!=='All Fests'&&{fest_name:fest})}).toString();
+    const res = await fetch(API_BASE+'/transactions?'+qs).then(r=>r.json());
+    const txs = res.transactions||[];
+    totalCount = res.total||txs.length;
+    const tbody = document.getElementById('tx-table-body');
+    const paging= document.getElementById('paging-info');
+    if(paging) paging.textContent = `Showing ${(page-1)*20+1}–${Math.min(page*20,totalCount)} of ${Number(totalCount).toLocaleString()} results`;
+    tbody.innerHTML = txs.map(tx=>{
+      const dt = new Date(tx.created_at);
+      const time = dt.toLocaleString('en-IN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+      const sc = tx.status==='success'?'bg-[#D1FAE5] text-[#065F46]':tx.status==='pending'?'bg-[#FEF3C7] text-[#92400E]':'bg-[#FEE2E2] text-[#991B1B]';
+      const dot = tx.status==='success'?'bg-[#10B981]':tx.status==='pending'?'bg-[#F59E0B]':'bg-[#EF4444]';
+      const amt = tx.status==='failed'?'text-[#EF4444]':'text-[#10B981]';
+      return `<tr class="hover:bg-[#F9F9FF] transition-colors">
+        <td class="py-4 px-4 whitespace-nowrap">${time}</td>
+        <td class="py-4 px-4 font-mono text-xs text-primary truncate max-w-[120px]">${tx.student_wallet||'—'}</td>
+        <td class="py-4 px-4 font-medium">${tx.merchant_name||'—'}</td>
+        <td class="py-4 px-4"><span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-[10px] uppercase font-bold">${tx.fest_name||'—'}</span></td>
+        <td class="py-4 px-4 font-bold text-right ${amt} whitespace-nowrap">${tx.status==='failed'?'- ':''+ ''}${Number(tx.amount).toFixed(2)}</td>
+        <td class="py-4 px-4 text-center"><span class="inline-flex items-center px-2.5 py-1 rounded-full ${sc} text-[10px] font-bold gap-1"><span class="w-1.5 h-1.5 rounded-full ${dot}"></span>${tx.status.charAt(0).toUpperCase()+tx.status.slice(1)}</span></td>
+        <td class="py-4 px-4 font-mono text-xs text-outline text-right truncate max-w-[100px]">${tx.tx_hash||'—'}</td>
+      </tr>`;
+    }).join('');
+    if(!txs.length) tbody.innerHTML='<tr><td colspan="7" class="text-center py-10 text-on-surface-variant">No transactions found</td></tr>';
+  } catch(e){ console.warn('tx fallback',e); }
+}
+// Wire up filters
+document.addEventListener('DOMContentLoaded',()=>{
+  loadStats();
+  loadTransactions();
+  const searchEl = document.querySelector('input[placeholder="Search merchant or wallet..."]');
+  const statusEl = document.querySelectorAll('select')[1];
+  const festEl   = document.querySelectorAll('select')[0];
+  function refresh(){ loadTransactions(1, searchEl?.value||'', statusEl?.value||'', festEl?.value||''); }
+  searchEl?.addEventListener('input', refresh);
+  statusEl?.addEventListener('change', refresh);
+  festEl  ?.addEventListener('change', refresh);
+});
+</script>
+<script src="exportCsv.js"></script>
 </body></html>

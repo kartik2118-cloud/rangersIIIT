@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FestPass Organizer - Add Merchant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;450;500&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
+          colors: {
+            primary: "#97A97C",
+            "primary-container": "#CFDBD5",
+            secondary: "#B5C9B3",
+            "secondary-container": "#E8ECE6",
+            background: "#F8F9FA",
+            surface: "#FFFFFF",
+            "surface-container-lowest": "#FFFFFF",
+            "surface-container-low": "#F1F5F9",
+            "surface-container": "#E2E8F0",
+            "surface-container-high": "#CBD5E1",
+            "surface-container-highest": "#94A3B8",
+            "on-background": "#0F172A",
+            "on-surface": "#1E293B",
+            "on-surface-variant": "#475569",
+            outline: "#94A3B8",
+            "outline-variant": "#E2E8F0",
+            "inverse-surface": "#1E293B",
+            "inverse-on-surface": "#F8FAFC",
+            "tertiary": "#A3B18A",
+            "tertiary-container": "#DAD7CD",
+            "on-primary": "#FFFFFF",
+            "on-primary-container": "#2D3A28",
+            "on-secondary-container": "#3A4238",
+            "on-tertiary-container": "#3A3E31",
+            "error": "#EF4444",
+            "error-container": "#FEE2E2",
+            "on-error-container": "#991B1B"
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            h1: ['Outfit', 'sans-serif'],
+            h2: ['Outfit', 'sans-serif'],
+            h3: ['Outfit', 'sans-serif'],
+            'body-md': ['Outfit', 'sans-serif'],
+            'body-lg': ['Outfit', 'sans-serif'],
+            'label-sm': ['Outfit', 'sans-serif'],
+            'data-mono': ['IBM Plex Mono', 'monospace'],
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+            'full': '9999px'
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background font-sans text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-slate-950 border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+<div class="px-6 py-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-container to-primary flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div>
+<h1 class="text-xl font-extrabold text-white tracking-tighter">FestPass</h1>
+<p class="text-xs text-primary-container font-semibold tracking-wider uppercase">Organizer</p>
+</div>
+</div>
+<nav class="flex-1 mt-6 flex flex-col gap-1 px-3">
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="overview.html">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">dashboard</span>Overview</a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="fest%20management.html">
+<span class="material-symbols-outlined mr-3 text-lg">confirmation_number</span>Fests</a>
+<a class="border-l-4 border-[#6A5CF6] bg-white/10 text-white font-semibold flex items-center px-6 py-3 transition-all rounded-r-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="merchants.html">
+<span class="material-symbols-outlined mr-3 text-lg text-[#6A5CF6]" style="font-variation-settings: 'FILL' 1;">storefront</span>Merchants</a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="revenue%20and%20settlement.html">
+<span class="material-symbols-outlined mr-3 text-lg">payments</span>Payments</a>
+<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="QR%20code%20generator.html">
+<span class="material-symbols-outlined mr-3 text-lg">qr_code_2</span>QR Codes</a>
+</nav>
+</aside>
+
+<!-- Main Content Canvas -->
+<div class="flex-1 ml-sidebar-width flex flex-col min-h-screen">
+<header class="sticky top-0 w-full z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/30 shadow-sm flex items-center justify-between px-8 h-[68px]">
+<div class="flex items-center gap-4">
+<div class="flex items-center text-slate-500 font-label-sm text-xs gap-2 uppercase font-bold">
+<span>Merchants</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary-container">Add New</span>
+</div>
+</div>
+</header>
+
+<main class="flex-1 p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto w-full">
+<div class="lg:col-span-12 mb-2 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+<div>
+<h1 class="font-h1 text-[32px] font-bold text-on-surface mb-1">Add a New Merchant</h1>
+<p class="font-body-md text-sm text-on-surface-variant">Register a merchant and associate them with a festival.</p>
+</div>
+<div class="flex gap-3">
+<a href="merchants.html" class="px-6 py-2.5 rounded-lg bg-surface-container border border-outline-variant/30 font-label-sm text-xs font-bold text-on-surface-variant uppercase hover:bg-surface-variant transition-colors flex items-center justify-center">Cancel</a>
+<button id="btn-submit" class="bg-primary text-white font-label-sm text-xs font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider gap-2">
+<span class="material-symbols-outlined text-[18px]">person_add</span>Register Merchant
+</button>
+</div>
+</div>
+
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface rounded-xl border border-outline-variant/30 p-8 shadow-sm">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
+<div class="w-8 h-8 rounded bg-[#e3dfff] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#140067] text-[20px]">storefront</span>
+</div>
+<h2 class="font-h2 text-[24px] font-bold text-on-surface">Merchant Details</h2>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-xs font-bold text-on-surface-variant uppercase">Merchant Name *</label>
+<input id="merchant-name" class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-sm outline-none transition-all placeholder:text-outline" placeholder="e.g. Bite Me Burger" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-xs font-bold text-on-surface-variant uppercase">Associated Fest *</label>
+<select id="merchant-fest" class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-sm outline-none transition-all">
+<option value="">Select Fest...</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-xs font-bold text-on-surface-variant uppercase">Category</label>
+<select id="merchant-category" class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-sm outline-none transition-all">
+<option value="Food & Bev">Food & Bev</option>
+<option value="Merchandise">Merchandise</option>
+<option value="Services">Services</option>
+<option value="Entertainment">Entertainment</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-surface rounded-xl border border-outline-variant/30 p-8 shadow-sm">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
+<div class="w-8 h-8 rounded bg-[#e9ddff] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#1f1635] text-[20px]">account_balance_wallet</span>
+</div>
+<h3 class="font-h2 text-[24px] font-bold text-on-surface">Settlement Wallet</h3>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-xs font-bold text-on-surface-variant uppercase">Wallet Address *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">account_balance_wallet</span>
+<input id="merchant-wallet" class="w-full h-11 pl-10 pr-3 rounded-md bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container/50 font-data-mono text-[13px] outline-none transition-all placeholder:text-outline" placeholder="0x..." type="text"/>
+</div>
+<p class="text-xs text-outline mt-1 font-body-md">Funds from transactions will be routed here.</p>
+</div>
+</div>
+</div>
+
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-gradient-to-b from-surface-container-low to-surface rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm">
+<div class="p-6">
+<h4 class="font-label-sm text-xs font-bold text-on-surface-variant uppercase mb-2">Adding Merchants</h4>
+<p class="font-body-md text-sm text-on-surface leading-relaxed mb-6">
+Merchants are the vendors selling items at a fest. Once added, they get a profile and QR code for receiving funds instantly from attendees.
+</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
+<div><p class="font-label-sm text-xs font-bold">Wallet is Immutable</p><p class="font-body-md text-xs text-on-surface-variant mt-1">Make sure the wallet address is correct. Payments are non-reversible on the blockchain.</p></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+const API_BASE = 'http://localhost:4000/api';
+// Load fests into the select dropdown
+async function initForm() {
+    try {
+        const fests = await fetch(API_BASE+'/fests').then(r=>r.json());
+        const select = document.getElementById('merchant-fest');
+        fests.forEach(f=>{
+            const op = document.createElement('option');
+            op.value = f.id;
+            op.textContent = f.name;
+            select.appendChild(op);
+        });
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlFestId = urlParams.get('fest_id');
+        if (urlFestId) {
+            select.value = urlFestId;
+        }
+    } catch(e) { console.error(e); }
+}
+initForm();
+
+document.getElementById('btn-submit').addEventListener('click', async ()=>{
+    const name = document.getElementById('merchant-name').value;
+    const fest_id = document.getElementById('merchant-fest').value;
+    const category = document.getElementById('merchant-category').value;
+    const wallet_addr = document.getElementById('merchant-wallet').value;
+    if(!name || !fest_id || !wallet_addr) return alert('Please fill required fields.');
+    try {
+        const res = await fetch(API_BASE+'/merchants', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({name, fest_id, category, wallet_addr})
+        });
+        if(res.ok) {
+            window.location.href = 'merchants.html';
+        } else {
+            const err = await res.json();
+            alert('Error: '+err.error);
+        }
+    } catch(e) { alert('Failed to create merchant'); }
+});
+</script>
+</body></html>

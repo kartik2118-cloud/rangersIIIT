@@ -13,6 +13,16 @@
       darkMode: "class",
       theme: {
         extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
           colors: {
             primary: "#97A97C",
             "primary-container": "#CFDBD5",
@@ -81,42 +91,12 @@
 </div>
 <div class="flex-1 py-6 overflow-y-auto">
 <ul class="space-y-2  text-sm tracking-wide">
-<li>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="dashboard">dashboard</span>
-                        Overview
-                    </a>
-</li>
-<li>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="confirmation_number">confirmation_number</span>
-                        Fests
-                    </a>
-</li>
-<li>
-<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-primary" data-icon="storefront">storefront</span>
-                        Merchants
-                    </a>
-</li>
-<li>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="payments">payments</span>
-                        Payments
-                    </a>
-</li>
-<li>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="qr_code_2">qr_code_2</span>
-                        QR Codes
-                    </a>
-</li>
-<li>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="settings">settings</span>
-                        Settings
-                    </a>
-</li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="overview.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="dashboard">dashboard</span>Overview</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="fest%20management.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="confirmation_number">confirmation_number</span>Fests</a></li>
+<li><a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all" href="merchants.html"><span class="material-symbols-outlined mr-3 text-primary" data-icon="storefront">storefront</span>Merchants</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="revenue%20and%20settlement.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="payments">payments</span>Payments</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="QR%20code%20generator.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="qr_code_2">qr_code_2</span>QR Codes</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="#"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="settings">settings</span>Settings</a></li>
 </ul>
 </div>
 </nav>
@@ -154,10 +134,10 @@
 <h1 class="font-h1 text-h1 text-on-surface mb-1">Merchants</h1>
 <p class="font-body-md text-body-md text-on-surface-variant">Manage and track vendor performance across your festivals.</p>
 </div>
-<button class="bg-gradient-to-r from-primary-container to-primary text-slate-800 px-6 py-2.5 rounded-2xl font-label-sm text-label-sm hover:scale-[0.98] active:scale-95 transition-all shadow-[0_4px_14px_0_rgba(106,92,246,0.39)] flex items-center gap-2">
+<a href="add%20merchant.html" class="bg-gradient-to-r from-primary-container to-primary text-slate-800 px-6 py-2.5 rounded-2xl font-label-sm text-label-sm hover:scale-[0.98] active:scale-95 transition-all shadow-[0_4px_14px_0_rgba(106,92,246,0.39)] flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
                     Add Merchant
-                </button>
+                </a>
 </div>
 <!-- Filter Bar -->
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-4 mb-lg flex flex-col md:flex-row gap-4 items-center justify-between shadow-soft border-transparent">
@@ -189,13 +169,13 @@
 </div>
 </div>
 <!-- Export Button -->
-<button class="bg-surface-container border border-outline-variant/50 text-on-surface px-4 py-2 rounded-2xl font-label-sm text-label-sm uppercase hover:bg-surface-variant transition-colors flex items-center gap-2 shrink-0">
+<button onclick="exportDataToCSV('merchants')" class="bg-surface-container border border-outline-variant/50 text-on-surface px-4 py-2 rounded-2xl font-label-sm text-label-sm uppercase hover:bg-surface-variant transition-colors flex items-center gap-2 shrink-0">
 <span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
                     Export CSV
                 </button>
 </div>
 <!-- Merchant Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="merchant-grid">
 <!-- Card 1 -->
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft border-transparent hover:shadow-floating border-transparent transition-all duration-300 flex flex-col group">
 <div class="flex justify-between items-start mb-4">
@@ -355,4 +335,79 @@
 </div>
 </main>
 </div>
+<script>
+const API_BASE='http://localhost:4000/api';
+const CATEGORY_ICONS = {'Food & Bev':'restaurant','Merchandise':'checkroom','Services':'build','Entertainment':'music_note'};
+const CATEGORY_COLORS = {'Food & Bev':'bg-red-100 text-red-800','Merchandise':'bg-amber-100 text-amber-800','Services':'bg-blue-100 text-blue-800','Entertainment':'bg-purple-100 text-purple-800'};
+async function loadMerchants(){
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const url = API_BASE+'/merchants'+(params.toString()?'?'+params.toString():'');
+    const merchants = await fetch(url).then(r=>r.json());
+    const grid = document.getElementById('merchant-grid');
+    if(grid && merchants.length){
+      grid.innerHTML = merchants.map(m=>{
+        const icon = CATEGORY_ICONS[m.category]||'store';
+        const badgeCls = CATEGORY_COLORS[m.category]||'bg-slate-100 text-slate-800';
+        const shortWallet = m.wallet_addr ? m.wallet_addr.slice(0,6)+'...'+m.wallet_addr.slice(-4) : '—';
+        const joined = m.joined_at ? new Date(m.joined_at).toLocaleDateString('en-US',{month:'short',year:'2-digit'}) : '—';
+        const rev = m.revenue ? (m.revenue>=1000?'₹'+(m.revenue/1000).toFixed(1)+'k':'₹'+m.revenue) : '₹0';
+        return `<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft hover:shadow-floating transition-all duration-300 flex flex-col group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                <span class="material-symbols-outlined text-[24px]">${icon}</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-on-surface">${m.name}</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="${badgeCls} px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase">${m.category||'General'}</span>
+                </div>
+              </div>
+            </div>
+            <button class="text-outline-variant hover:text-on-surface transition-colors" onclick="navigator.clipboard.writeText('${m.wallet_addr}')">
+              <span class="material-symbols-outlined">more_vert</span>
+            </button>
+          </div>
+          <div class="mb-4">
+            <div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded-md mb-3 border border-outline-variant/20">
+              <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              <span class="text-xs text-on-surface-variant">${m.festName||'—'}</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-low rounded-2xl p-2.5 border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+              <div class="flex items-center gap-2 overflow-hidden">
+                <span class="material-symbols-outlined text-[16px] text-primary">account_balance_wallet</span>
+                <span class="font-mono text-xs text-on-surface-variant truncate">${shortWallet}</span>
+              </div>
+              <button class="text-outline-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant" onclick="navigator.clipboard.writeText('${m.wallet_addr}')">
+                <span class="material-symbols-outlined text-[16px]">content_copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mb-6 border-t border-b border-outline-variant/20 py-3">
+            <div><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Revenue</span><span class="font-semibold text-on-surface">${rev}</span></div>
+            <div class="border-l border-outline-variant/20 pl-2"><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Transacts</span><span class="font-semibold text-on-surface">${(m.transactionCount||0).toLocaleString()}</span></div>
+            <div class="border-l border-outline-variant/20 pl-2"><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Joined</span><span class="text-xs text-on-surface-variant mt-1 block">${joined}</span></div>
+          </div>
+          <button class="w-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary py-2 rounded-2xl text-sm uppercase font-semibold tracking-wide transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">qr_code</span>Generate QR
+          </button>
+        </div>`;
+      }).join('');
+    }
+  } catch(e){ console.warn('API fallback',e); }
+}
+loadMerchants();
+// Search & filter wiring
+document.addEventListener('DOMContentLoaded',()=>{
+  const searchInput = document.querySelector('input[placeholder="Search merchants..."]');
+  if(searchInput) searchInput.addEventListener('input', e=>{
+    const q=e.target.value.toLowerCase();
+    document.querySelectorAll('#merchant-grid > div').forEach(card=>{
+      card.style.display=card.innerText.toLowerCase().includes(q)?'':'none';
+    });
+  });
+});
+</script>
+<script src="exportCsv.js"></script>
 </body></html>

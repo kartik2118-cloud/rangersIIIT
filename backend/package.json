@@ -8,6 +8,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.104.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "ethers": "^6.11.0",
