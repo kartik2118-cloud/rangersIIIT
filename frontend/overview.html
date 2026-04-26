@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FestPass Organizer - Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
+          colors: {
+            primary: "#97A97C",
+            "primary-container": "#CFDBD5",
+            secondary: "#B5C9B3",
+            "secondary-container": "#E8ECE6",
+            background: "#F8F9FA",
+            surface: "#FFFFFF",
+            "surface-container-lowest": "#FFFFFF",
+            "surface-container-low": "#F1F5F9",
+            "surface-container": "#E2E8F0",
+            "surface-container-high": "#CBD5E1",
+            "surface-container-highest": "#94A3B8",
+            "on-background": "#0F172A",
+            "on-surface": "#1E293B",
+            "on-surface-variant": "#475569",
+            outline: "#94A3B8",
+            "outline-variant": "#E2E8F0",
+            "inverse-surface": "#1E293B",
+            "inverse-on-surface": "#F8FAFC",
+            "tertiary": "#A3B18A",
+            "tertiary-container": "#DAD7CD",
+            "on-primary": "#FFFFFF",
+            "on-primary-container": "#2D3A28",
+            "on-secondary-container": "#3A4238",
+            "on-tertiary-container": "#3A3E31",
+            "error": "#EF4444",
+            "error-container": "#FEE2E2",
+            "on-error-container": "#991B1B"
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            h1: ['Outfit', 'sans-serif'],
+            h2: ['Outfit', 'sans-serif'],
+            h3: ['Outfit', 'sans-serif'],
+            'body-md': ['Outfit', 'sans-serif'],
+            'body-lg': ['Outfit', 'sans-serif'],
+            'label-sm': ['Outfit', 'sans-serif'],
+            'data-mono': ['IBM Plex Mono', 'monospace'],
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+            'full': '9999px'
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background font-sans text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col w-64 h-screen fixed left-0 top-0 bg-white border-r border-slate-100 shadow-soft z-50">
+<div class="h-16 flex items-center px-6 mt-4 mb-4">
+<img alt="FestPass Organizer Logo" class="w-10 h-10 rounded-2xl mr-3" data-alt="Abstract geometric logo mark in vibrant violet and neon green, suitable for a music festival management platform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA062_8zjJAboOh6ba6Hko_mqEdStAbfox2CnWGaYxOJkGVEHvTbDcZ2AexvPvSRDPWDuU1TyfTSeEZWDu8NQ246oTYmkDIKYBVa_5yQsVnyNOQIxUL4HA3P4_y5h8K_huVebFBarvphTn-4L5qVia1G1Gpv8fbfH384XVSPTsiQozOvPAF2R03OBTslam6JmEePnlyBUevgoF6G6498b4Vg21YoMvSYIa2bLAN6fcq_zp9fk37aisVJj0iDzustOwAJjVm07Y_3lg"/>
+<div class="flex flex-col">
+<span class="text-xl font-extrabold text-slate-800 tracking-tighter">FestPass</span>
+<span class="text-xs text-primary font-medium tracking-wide uppercase">Organizer</span>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-4 flex flex-col space-y-1 text-sm tracking-wide">
+<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="overview.html">
+<span class="material-symbols-outlined mr-3 text-lg" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Overview
+            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="fest%20management.html">
+<span class="material-symbols-outlined mr-3 text-lg">confirmation_number</span>
+                Fests
+            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="merchants.html">
+<span class="material-symbols-outlined mr-3 text-lg">storefront</span>
+                Merchants
+            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="revenue%20and%20settlement.html">
+<span class="material-symbols-outlined mr-3 text-lg">payments</span>
+                Payments
+            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="QR%20code%20generator.html">
+<span class="material-symbols-outlined mr-3 text-lg">qr_code_2</span>
+                QR Codes
+            </a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="login.html">
+<span class="material-symbols-outlined mr-3 text-lg">settings</span>
+                Settings
+            </a>
+<a class="text-error flex items-center px-6 py-3 hover:bg-error/10 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out mt-auto" href="login.html">
+<span class="material-symbols-outlined mr-3 text-lg">logout</span>
+                Log Out
+            </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-sidebar-width flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-40 bg-white/80 bg-white/90 backdrop-blur-md border-b border-slate-200/30 dark:border-slate-100 shadow-sm flex items-center justify-between px-8 h-header-height transition-all duration-300">
+<div class="flex items-center">
+<h1 class="font-h2 text-h2 text-on-surface">Overview</h1>
+</div>
+<div class="flex items-center space-x-6">
+<!-- Create Fest Button -->
+<a href="create%20%20new%20event.html" class="bg-primary text-white font-label-sm text-label-sm px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider">
+<span class="material-symbols-outlined mr-2 text-[18px]">add</span>
+                    Create Fest
+                </a>
+<!-- Actions -->
+<div class="flex items-center space-x-2">
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<img alt="Organizer Profile" class="w-10 h-10 rounded-full border border-outline-variant/30 cursor-pointer object-cover" data-alt="Portrait of a smiling young professional woman with short dark hair wearing a minimalist white blouse against a neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhZdhaITY_t_TMp1j6eCS5V5_LeYzWRFytDdopBreggsl83QAPgSl09BL2K9CCLDAVb8tsaO1Ly0SbSKpK4yDYU74bQRLeZRi2Rq5NjzSxQmhcYrV5lrY5HRUpBpvIsuHfPP89sNw6fTzORHUZh06CCOsi47RCaccET2vSmZY8Oys5THVLcI0ALQli6o4Z-w5M7oe-zpQywT9JWX9Bhc3MPLb6nZb6HXxG6L7aHoRQw0EUSKy2iee3yzNfblWmI6htPaiuypEDZ-M"/>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-gutter space-y-gutter">
+<!-- Bento Stat Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1: Revenue -->
+<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container/10 rounded-full blur-xl group-hover:bg-primary-container/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Revenue</p>
+<div class="p-2 bg-primary-container/10 rounded-2xl text-primary-container">
+<span class="material-symbols-outlined text-lg">account_balance</span>
+</div>
+</div>
+<div class="flex items-end space-x-3">
+<h2 class="font-h1 text-h1 text-on-surface" data-stat="revenue">24,350</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">FEST</span>
+</div>
+<div class="mt-4 flex items-center text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+<span class="font-label-sm text-label-sm">18% vs last week</span>
+</div>
+</div>
+<!-- Card 2: Transactions -->
+<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary-container/10 rounded-full blur-xl group-hover:bg-tertiary-container/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Transactions Today</p>
+<div class="p-2 bg-tertiary-container/10 rounded-2xl text-tertiary-container">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+</div>
+</div>
+<div class="flex items-end space-x-3">
+<h2 class="font-h1 text-h1 text-on-surface" data-stat="txToday">312</h2>
+</div>
+<div class="mt-4 flex items-center text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px] mr-1">arrow_upward</span>
+<span class="font-label-sm text-label-sm">24 new today</span>
+</div>
+</div>
+<!-- Card 3: Merchants -->
+<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container/10 rounded-full blur-xl group-hover:bg-secondary-container/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Merchants</p>
+<div class="p-2 bg-secondary-container/10 rounded-2xl text-secondary-container">
+<span class="material-symbols-outlined text-lg">storefront</span>
+</div>
+</div>
+<div class="flex items-end space-x-3">
+<h2 class="font-h1 text-h1 text-on-surface" data-stat="merchants">28</h2>
+</div>
+<div class="mt-4 flex items-center text-on-surface-variant bg-surface-container-high w-fit px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+<span class="font-label-sm text-label-sm">All operational</span>
+</div>
+</div>
+<!-- Card 4: Fests -->
+<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Fests</p>
+<div class="p-2 bg-primary/10 rounded-2xl text-primary">
+<span class="material-symbols-outlined text-lg">festival</span>
+</div>
+</div>
+<div class="flex items-end space-x-3">
+<h2 class="font-h1 text-h1 text-on-surface" data-stat="fests">2</h2>
+</div>
+<div class="mt-4 flex items-center text-primary bg-primary-container/10 w-fit px-2 py-1 rounded-md cursor-pointer hover:bg-primary-container/20 transition-colors">
+<span class="font-label-sm text-label-sm">View details</span>
+<span class="material-symbols-outlined text-[14px] ml-1">arrow_forward</span>
+</div>
+</div>
+</section>
+<!-- Middle Row: Chart & List -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Revenue Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-on-surface">Revenue by Fest</h3>
+<div class="flex space-x-2">
+<button class="font-label-sm text-label-sm px-3 py-1 bg-surface-variant text-on-surface rounded-md">7 Days</button>
+<button class="font-label-sm text-label-sm px-3 py-1 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors">30 Days</button>
+</div>
+</div>
+<!-- Placeholder for Chart -->
+<div class="h-64 flex items-end justify-between space-x-4 relative">
+<!-- Y-axis labels -->
+<div class="absolute left-0 top-0 bottom-6 flex flex-col justify-between text-xs text-on-surface-variant font-data-mono">
+<span>10k</span>
+<span>7.5k</span>
+<span>5k</span>
+<span>2.5k</span>
+<span>0</span>
+</div>
+<!-- Grid lines -->
+<div class="absolute left-8 right-0 top-0 bottom-6 flex flex-col justify-between z-0">
+<div class="border-b border-outline-variant/20 w-full h-0"></div>
+<div class="border-b border-outline-variant/20 w-full h-0"></div>
+<div class="border-b border-outline-variant/20 w-full h-0"></div>
+<div class="border-b border-outline-variant/20 w-full h-0"></div>
+<div class="border-b border-outline-variant/20 w-full h-0"></div>
+</div>
+<!-- Bars -->
+<div class="ml-10 w-full flex justify-around items-end h-full pb-6 z-10">
+<!-- Neon Nights -->
+<div class="flex flex-col items-center w-1/4 group cursor-pointer">
+<div class="w-full bg-primary-container rounded-t-md h-[80%] group-hover:opacity-90 transition-opacity relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">8,200 FEST</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 truncate w-full text-center">Neon Nights</span>
+</div>
+<!-- Sonic Waves -->
+<div class="flex flex-col items-center w-1/4 group cursor-pointer">
+<div class="w-full bg-tertiary-container rounded-t-md h-[45%] group-hover:opacity-90 transition-opacity relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">4,500 FEST</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 truncate w-full text-center">Sonic Waves</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Merchants List -->
+<div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-on-surface">Top Merchants</h3>
+<button class="p-1 hover:bg-surface-container rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 space-y-4" id="top-merchants-list">
+<!-- Merchant Item -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-2xl transition-colors border border-transparent hover:border-outline-variant/20 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-h3 text-h3">B</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">Burger Bros</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs">Food &amp; Bev</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-h3 text-[14px] text-on-surface">4,250 FEST</p>
+<p class="font-body-md text-body-md text-emerald-600 text-xs">124 tx</p>
+</div>
+</div>
+<!-- Merchant Item -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-2xl transition-colors border border-transparent hover:border-outline-variant/20 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-h3 text-h3">M</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">Merch Tent A</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs">Apparel</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-h3 text-[14px] text-on-surface">3,100 FEST</p>
+<p class="font-body-md text-body-md text-emerald-600 text-xs">86 tx</p>
+</div>
+</div>
+<!-- Merchant Item -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-2xl transition-colors border border-transparent hover:border-outline-variant/20 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-h3 text-h3">V</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">VIP Lounge Bar</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs">Drinks</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-h3 text-[14px] text-on-surface">2,840 FEST</p>
+<p class="font-body-md text-body-md text-emerald-600 text-xs">42 tx</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2 border border-outline-variant/30 rounded-2xl font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-colors uppercase tracking-wider">
+                        View All
+                    </button>
+</div>
+</section>
+<!-- Bottom Row: Recent Transactions Table -->
+<section class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent overflow-hidden">
+<div class="p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h3 text-h3 text-on-surface">Recent Transactions</h3>
+<button onclick="exportDataToCSV('overview')" class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant transition-colors flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">download</span>
+                        EXPORT CSV
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="p-4 font-medium pl-6">Time</th>
+<th class="p-4 font-medium">Merchant</th>
+<th class="p-4 font-medium">Fest</th>
+<th class="p-4 font-medium text-right">Amount (FEST)</th>
+<th class="p-4 font-medium text-center">Status</th>
+<th class="p-4 font-medium pr-6">Tx Hash</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant/20" id="recent-tx-body">
+<!-- Row 1 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="p-4 pl-6 text-on-surface-variant">14:32:05</td>
+<td class="p-4 font-medium">Burger Bros</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] uppercase font-bold rounded tracking-wider">Neon Nights</span>
+</td>
+<td class="p-4 text-right font-data-mono font-medium">15.00</td>
+<td class="p-4 text-center">
+<span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-[10px] uppercase font-bold rounded-full tracking-wider">Success</span>
+</td>
+<td class="p-4 pr-6">
+<div class="flex items-center text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">
+<span class="font-data-mono text-xs mr-2 truncate w-24">0x7f...8a9b</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="p-4 pl-6 text-on-surface-variant">14:28:12</td>
+<td class="p-4 font-medium">Merch Tent A</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] uppercase font-bold rounded tracking-wider">Neon Nights</span>
+</td>
+<td class="p-4 text-right font-data-mono font-medium">45.50</td>
+<td class="p-4 text-center">
+<span class="px-2 py-1 bg-amber-100 text-amber-800 text-[10px] uppercase font-bold rounded-full tracking-wider">Pending</span>
+</td>
+<td class="p-4 pr-6">
+<div class="flex items-center text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">
+<span class="font-data-mono text-xs mr-2 truncate w-24">0x3e...2c1f</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="p-4 pl-6 text-on-surface-variant">14:15:44</td>
+<td class="p-4 font-medium">VIP Lounge Bar</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-tertiary-container/20 text-tertiary text-[10px] uppercase font-bold rounded tracking-wider">Sonic Waves</span>
+</td>
+<td class="p-4 text-right font-data-mono font-medium">120.00</td>
+<td class="p-4 text-center">
+<span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-[10px] uppercase font-bold rounded-full tracking-wider">Success</span>
+</td>
+<td class="p-4 pr-6">
+<div class="flex items-center text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">
+<span class="font-data-mono text-xs mr-2 truncate w-24">0x9a...4d5e</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="p-4 pl-6 text-on-surface-variant">14:02:01</td>
+<td class="p-4 font-medium">Craft Beer Co</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] uppercase font-bold rounded tracking-wider">Neon Nights</span>
+</td>
+<td class="p-4 text-right font-data-mono font-medium">24.00</td>
+<td class="p-4 text-center">
+<span class="px-2 py-1 bg-rose-100 text-rose-800 text-[10px] uppercase font-bold rounded-full tracking-wider">Failed</span>
+</td>
+<td class="p-4 pr-6">
+<div class="flex items-center text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">
+<span class="font-data-mono text-xs mr-2 truncate w-24">0x1b...7f8d</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">content_copy</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-lowest border-t border-outline-variant/30 flex justify-center">
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center">
+                        Load More
+                        <span class="material-symbols-outlined text-[16px] ml-1">expand_more</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<script>
+const API_BASE = 'http://localhost:4000/api';
+async function loadOverview() {
+  try {
+    const data = await fetch(API_BASE+'/overview').then(r=>r.json());
+    // Stat cards
+    document.querySelector('[data-stat="revenue"]').textContent = Number(data.totalRevenue).toLocaleString();
+    document.querySelector('[data-stat="txToday"]').textContent = data.transactionsToday;
+    document.querySelector('[data-stat="merchants"]').textContent = data.activeMerchants;
+    document.querySelector('[data-stat="fests"]').textContent = data.activeFests;
+    // Top merchants
+    const merchantList = document.getElementById('top-merchants-list');
+    if (merchantList && data.topMerchants?.length) {
+      merchantList.innerHTML = data.topMerchants.map(m => `
+        <div class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-2xl transition-colors border border-transparent hover:border-outline-variant/20 cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-h3 text-h3">${m.name[0]}</div>
+            <div><p class="font-label-sm text-label-sm text-on-surface font-semibold">${m.name}</p></div>
+          </div>
+          <div class="text-right">
+            <p class="font-h3 text-[14px] text-on-surface">${Number(m.revenue).toLocaleString()} FEST</p>
+            <p class="font-body-md text-body-md text-emerald-600 text-xs">${m.txCount} tx</p>
+          </div>
+        </div>`).join('');
+    }
+    // Recent transactions
+    const tbody = document.getElementById('recent-tx-body');
+    if (tbody && data.recentTransactions?.length) {
+      tbody.innerHTML = data.recentTransactions.map(tx => {
+        const t = new Date(tx.created_at);
+        const time = t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        const statusClass = tx.status==='success'?'bg-emerald-100 text-emerald-800':tx.status==='pending'?'bg-amber-100 text-amber-800':'bg-rose-100 text-rose-800';
+        return `<tr class="hover:bg-[#F9F9FF] transition-colors group">
+          <td class="p-4 pl-6 text-on-surface-variant">${time}</td>
+          <td class="p-4 font-medium">${tx.merchant_name||'-'}</td>
+          <td class="p-4"><span class="px-2 py-1 bg-primary/10 text-primary text-[10px] uppercase font-bold rounded tracking-wider">${tx.fest_name||'-'}</span></td>
+          <td class="p-4 text-right font-data-mono font-medium">${Number(tx.amount).toFixed(2)}</td>
+          <td class="p-4 text-center"><span class="px-2 py-1 ${statusClass} text-[10px] uppercase font-bold rounded-full tracking-wider">${tx.status}</span></td>
+          <td class="p-4 pr-6"><span class="font-data-mono text-xs text-on-surface-variant truncate">${tx.tx_hash||'-'}</span></td>
+        </tr>`;
+      }).join('');
+    }
+  } catch(e) { console.warn('API not reachable, showing static data', e); }
+}
+loadOverview();
+</script>
+<script src="exportCsv.js"></script>
+</body></html>

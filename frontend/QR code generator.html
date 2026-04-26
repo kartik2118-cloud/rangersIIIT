@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FestPass Organizer - Merchants</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
+          colors: {
+            primary: "#97A97C",
+            "primary-container": "#CFDBD5",
+            secondary: "#B5C9B3",
+            "secondary-container": "#E8ECE6",
+            background: "#F8F9FA",
+            surface: "#FFFFFF",
+            "surface-container-lowest": "#FFFFFF",
+            "surface-container-low": "#F1F5F9",
+            "surface-container": "#E2E8F0",
+            "surface-container-high": "#CBD5E1",
+            "surface-container-highest": "#94A3B8",
+            "on-background": "#0F172A",
+            "on-surface": "#1E293B",
+            "on-surface-variant": "#475569",
+            outline: "#94A3B8",
+            "outline-variant": "#E2E8F0",
+            "inverse-surface": "#1E293B",
+            "inverse-on-surface": "#F8FAFC",
+            "tertiary": "#A3B18A",
+            "tertiary-container": "#DAD7CD",
+            "on-primary": "#FFFFFF",
+            "on-primary-container": "#2D3A28",
+            "on-secondary-container": "#3A4238",
+            "on-tertiary-container": "#3A3E31",
+            "error": "#EF4444",
+            "error-container": "#FEE2E2",
+            "on-error-container": "#991B1B"
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            h1: ['Outfit', 'sans-serif'],
+            h2: ['Outfit', 'sans-serif'],
+            h3: ['Outfit', 'sans-serif'],
+            'body-md': ['Outfit', 'sans-serif'],
+            'body-lg': ['Outfit', 'sans-serif'],
+            'label-sm': ['Outfit', 'sans-serif'],
+            'data-mono': ['IBM Plex Mono', 'monospace'],
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+            'full': '9999px'
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background font-sans text-on-background font-body-md min-h-screen antialiased flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col w-[256px] h-screen fixed left-0 top-0 bg-white border-r border-slate-100 shadow-soft z-50">
+<div class="flex items-center px-6 py-8 border-b border-slate-100">
+<div class="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center mr-3 shadow-lg">
+<span class="material-symbols-outlined text-slate-800" data-weight="fill" style="font-variation-settings: 'FILL' 1;">festival</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-extrabold text-slate-800 tracking-tighter font-h2 text-h2 leading-none mb-1">FestPass</span>
+<span class="text-xs text-slate-500 font-label-sm text-label-sm uppercase tracking-wider">Organizer</span>
+</div>
+</div>
+<div class="flex-1 py-6 overflow-y-auto">
+<ul class="space-y-2  text-sm tracking-wide">
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="overview.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="dashboard">dashboard</span>Overview</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="fest%20management.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="confirmation_number">confirmation_number</span>Fests</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="merchants.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="storefront">storefront</span>Merchants</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="revenue%20and%20settlement.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="payments">payments</span>Payments</a></li>
+<li><a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all" href="QR%20code%20generator.html"><span class="material-symbols-outlined mr-3 text-primary" data-icon="qr_code_2">qr_code_2</span>QR Codes</a></li>
+<li><a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="login.html"><span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors" data-icon="settings">settings</span>Settings</a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-[256px] flex flex-col min-h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-40 bg-white/80 bg-white/90 backdrop-blur-md border-b border-slate-200/30 dark:border-slate-100 shadow-sm flex items-center justify-between px-8 h-16 transition-all duration-300  font-medium">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-64 hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
+<input class="w-full bg-slate-50 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary-container/50 focus:bg-white transition-all text-on-surface placeholder:text-outline-variant" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<button class="flex items-center gap-2 hover:opacity-80 transition-opacity ml-2">
+<img alt="Organizer Profile" class="w-8 h-8 rounded-full border border-outline-variant/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByV9KfnRNu89RYOqCMZk1_zxKIXTAtuvWMwjbNB2_PFDC1SXY5fayWB9Df_Zs4txclqM2Z7XwT_jrUdemVoQKwDiLrSVPIfnvQWFuJLlNzJsCJew6WYC5NHzxCkl5kWDUmIwklPRklRYTgtf84cEPMtk4IdFPgU62wDJtWrehIdJvqmsud399YXEpgyzi3DigDtWr1wOoTjJpmlxkTD4H3o2vcaz9Pvt-mAkVtNrHDBdyeBeOkv-F4KjkBjLTYKTP8yYj0jCMc9js"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-gutter bg-surface">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-lg gap-4">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-1">Merchants</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage and track vendor performance across your festivals.</p>
+</div>
+<a href="add%20merchant.html" class="bg-gradient-to-r from-primary-container to-primary text-slate-800 px-6 py-2.5 rounded-2xl font-label-sm text-label-sm hover:scale-[0.98] active:scale-95 transition-all shadow-[0_4px_14px_0_rgba(106,92,246,0.39)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    Add Merchant
+                </a>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-4 mb-lg flex flex-col md:flex-row gap-4 items-center justify-between shadow-soft border-transparent">
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<!-- Fest Dropdown -->
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant/50 rounded-2xl pl-4 pr-10 py-2 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/50 focus:border-primary-container outline-none transition-all">
+<option>All Fests</option>
+<option>Neon Nights 2024</option>
+<option>Summer Solstice</option>
+<option>Tech Beats</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Category Dropdown -->
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant/50 rounded-2xl pl-4 pr-10 py-2 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/50 focus:border-primary-container outline-none transition-all">
+<option>All Categories</option>
+<option>Food &amp; Bev</option>
+<option>Merchandise</option>
+<option>Services</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Search -->
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[18px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-2xl pl-10 pr-4 py-2 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/50 focus:border-primary-container outline-none transition-all placeholder:text-outline-variant" placeholder="Search merchants..." type="text"/>
+</div>
+</div>
+<!-- Export Button -->
+<button onclick="exportDataToCSV('qrcodes')" class="bg-surface-container border border-outline-variant/50 text-on-surface px-4 py-2 rounded-2xl font-label-sm text-label-sm uppercase hover:bg-surface-variant transition-colors flex items-center gap-2 shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                    Export CSV
+                </button>
+</div>
+<!-- Merchant Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="merchant-grid">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft border-transparent hover:shadow-floating border-transparent transition-all duration-300 flex flex-col group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Bite Me Burger</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-[#FCA5A5]/20 text-[#991B1B] px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase">Food &amp; Bev</span>
+</div>
+</div>
+</div>
+<button class="text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded-md mb-3 border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Neon Nights 2024</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low rounded-2xl p-2.5 border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant truncate">0x71C...976F</span>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-6 border-t border-b border-outline-variant/20 py-3 mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Revenue</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">₹12.4k</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Transacts</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">842</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Joined</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Oct '23</span>
+</div>
+</div>
+<button class="w-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary py-2 rounded-2xl font-label-sm text-label-sm uppercase transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="qr_code">qr_code</span>
+                        Generate QR
+                    </button>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft border-transparent hover:shadow-floating border-transparent transition-all duration-300 flex flex-col group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/30 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[24px]" data-icon="checkroom">checkroom</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Neon Threads</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-[#FBBF24]/20 text-[#B45309] px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase">Merchandise</span>
+</div>
+</div>
+</div>
+<button class="text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded-md mb-3 border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Neon Nights 2024</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low rounded-2xl p-2.5 border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant truncate">0x8B3...1A2C</span>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-6 border-t border-b border-outline-variant/20 py-3 mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Revenue</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">₹5.8k</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Transacts</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">156</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Joined</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Jan '24</span>
+</div>
+</div>
+<button class="w-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary py-2 rounded-2xl font-label-sm text-label-sm uppercase transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="qr_code">qr_code</span>
+                        Generate QR
+                    </button>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft border-transparent hover:shadow-floating border-transparent transition-all duration-300 flex flex-col group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]" data-icon="local_drink">local_drink</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Thirst Trap</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-[#60A5FA]/20 text-[#1E3A8A] px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase">Food &amp; Bev</span>
+</div>
+</div>
+</div>
+<button class="text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded-md mb-3 border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Summer Solstice</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low rounded-2xl p-2.5 border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant truncate">0x9F2...4E8D</span>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-6 border-t border-b border-outline-variant/20 py-3 mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Revenue</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">₹18.2k</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Transacts</span>
+<span class="font-h3 text-h3 text-on-surface leading-none">1,204</span>
+</div>
+<div class="flex flex-col border-l border-outline-variant/20 pl-2">
+<span class="text-[10px] text-outline uppercase tracking-wider mb-1">Joined</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Mar '23</span>
+</div>
+</div>
+<button class="w-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary py-2 rounded-2xl font-label-sm text-label-sm uppercase transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="qr_code">qr_code</span>
+                        Generate QR
+                    </button>
+</div>
+</div>
+</main>
+</div>
+
+<!-- QR Modal -->
+<div id="qr-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
+    <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-8 shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 transform transition-transform scale-95 opacity-0" id="qr-modal-content">
+        <div class="w-full flex justify-between items-center mb-6">
+            <h3 class="font-h3 text-h3 text-on-surface" id="qr-merchant-name">Merchant QR</h3>
+            <button onclick="closeQRModal()" class="text-outline-variant hover:text-on-surface transition-colors p-1 rounded-full hover:bg-surface-variant">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-outline-variant/20 shadow-inner mb-6">
+            <div id="qrcode"></div>
+        </div>
+        <p class="font-body-md text-sm text-on-surface-variant text-center mb-6 px-4">Attendees can scan this QR code to quickly pay <span id="qr-merchant-name-text" class="font-bold"></span>.</p>
+        <button onclick="downloadQR()" class="w-full bg-gradient-to-r from-primary-container to-primary text-slate-800 font-label-sm text-sm py-3 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            Download QR Code
+        </button>
+    </div>
+</div>
+
+<script>
+const API_BASE = 'http://localhost:4000/api';
+
+function showQR(walletAddr, merchantName) {
+    const modal = document.getElementById('qr-modal');
+    const content = document.getElementById('qr-modal-content');
+    const qrContainer = document.getElementById('qrcode');
+    
+    // Set text
+    document.getElementById('qr-merchant-name').textContent = merchantName;
+    document.getElementById('qr-merchant-name-text').textContent = merchantName;
+    
+    // Generate QR
+    qrContainer.innerHTML = '';
+    new QRCode(qrContainer, {
+        text: walletAddr,
+        width: 200,
+        height: 200,
+        colorDark : "#1b1b24",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    
+    // Show modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Trigger animation
+    setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    }, 10);
+}
+
+function closeQRModal() {
+    const modal = document.getElementById('qr-modal');
+    const content = document.getElementById('qr-modal-content');
+    
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
+    
+    setTimeout(() => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+    }, 200);
+}
+
+function downloadQR() {
+    const img = document.querySelector('#qrcode img');
+    if(img) {
+        const link = document.createElement('a');
+        link.href = img.src;
+        link.download = document.getElementById('qr-merchant-name').textContent + '_QR.png';
+        link.click();
+    }
+}
+
+// Close modal on click outside
+document.getElementById('qr-modal').addEventListener('click', (e) => {
+    if(e.target === document.getElementById('qr-modal')) closeQRModal();
+});
+async function loadMerchants() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const fest_id = params.get('fest_id');
+    const url = fest_id ? API_BASE+'/merchants?fest_id='+fest_id : API_BASE+'/merchants';
+    const merchants = await fetch(url).then(r=>r.json());
+    
+    const grid = document.getElementById('merchant-grid');
+    if(grid && merchants.length) {
+      grid.innerHTML = merchants.map(m => {
+        const icon = m.category==='Food & Bev'?'local_dining':m.category==='Merchandise'?'checkroom':'storefront';
+        const shortWallet = m.wallet_addr ? (m.wallet_addr.substring(0,5)+'...'+m.wallet_addr.substring(m.wallet_addr.length-4)) : 'No Wallet';
+        const rev = '₹'+Number((m.revenue||0)/1000).toFixed(1)+'k';
+        const joinedDate = new Date(m.joined_at);
+        const joined = joinedDate.toLocaleDateString('en-US',{month:'short',year:'2-digit'});
+        
+        return `<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-6 shadow-soft hover:shadow-floating transition-all duration-300 flex flex-col group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-[24px]">${icon}</span>
+              </div>
+              <div>
+                <h3 class="font-h3 text-h3 text-on-surface">${m.name}</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="bg-[#60A5FA]/20 text-[#1E3A8A] px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase">${m.category}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="inline-flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded-md mb-3 border border-outline-variant/20">
+              <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              <span class="text-xs text-on-surface-variant">${m.festName||(m.fests&&m.fests.name)||'—'}</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-low rounded-2xl p-2.5 border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+              <div class="flex items-center gap-2 overflow-hidden">
+                <span class="material-symbols-outlined text-[16px] text-primary">account_balance_wallet</span>
+                <span class="font-mono text-xs text-on-surface-variant truncate">${shortWallet}</span>
+              </div>
+              <button class="text-outline-variant hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-variant" onclick="navigator.clipboard.writeText('${m.wallet_addr}')">
+                <span class="material-symbols-outlined text-[16px]">content_copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mb-6 border-t border-b border-outline-variant/20 py-3 mt-auto">
+            <div><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Revenue</span><span class="font-semibold text-on-surface">${rev}</span></div>
+            <div class="border-l border-outline-variant/20 pl-2"><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Transacts</span><span class="font-semibold text-on-surface">${(m.transactionCount||0).toLocaleString()}</span></div>
+            <div class="border-l border-outline-variant/20 pl-2"><span class="text-[10px] text-outline uppercase tracking-wider mb-1 block">Joined</span><span class="text-xs text-on-surface-variant mt-1 block">${joined}</span></div>
+          </div>
+          <button class="w-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary py-2 rounded-2xl text-sm uppercase font-semibold tracking-wide transition-all flex items-center justify-center gap-2" onclick="showQR('${m.wallet_addr}', '${m.name}')">
+            <span class="material-symbols-outlined text-[18px]">qr_code</span>Generate QR
+          </button>
+        </div>`;
+      }).join('');
+    }
+  } catch(e){ console.warn('API fallback',e); }
+}
+loadMerchants();
+document.addEventListener('DOMContentLoaded',()=>{
+  const searchInput = document.querySelector('input[placeholder="Search merchants..."]');
+  if(searchInput) searchInput.addEventListener('input', e=>{
+    const q=e.target.value.toLowerCase();
+    document.querySelectorAll('#merchant-grid > div').forEach(card=>{
+      card.style.display=card.innerText.toLowerCase().includes(q)?'':'none';
+    });
+  });
+});
+</script>
+<script src="exportCsv.js"></script>
+</body></html>

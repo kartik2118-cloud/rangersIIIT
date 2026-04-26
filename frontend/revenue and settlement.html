@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FestPass Organizer - All Transactions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          spacing: {
+            "xl": "40px",
+            "header-height": "68px",
+            "sm": "8px",
+            "xs": "4px",
+            "sidebar-width": "256px",
+            "md": "16px",
+            "lg": "24px",
+            "gutter": "24px"
+          },
+          colors: {
+            primary: "#97A97C",
+            "primary-container": "#CFDBD5",
+            secondary: "#B5C9B3",
+            "secondary-container": "#E8ECE6",
+            background: "#F8F9FA",
+            surface: "#FFFFFF",
+            "surface-container-lowest": "#FFFFFF",
+            "surface-container-low": "#F1F5F9",
+            "surface-container": "#E2E8F0",
+            "surface-container-high": "#CBD5E1",
+            "surface-container-highest": "#94A3B8",
+            "on-background": "#0F172A",
+            "on-surface": "#1E293B",
+            "on-surface-variant": "#475569",
+            outline: "#94A3B8",
+            "outline-variant": "#E2E8F0",
+            "inverse-surface": "#1E293B",
+            "inverse-on-surface": "#F8FAFC",
+            "tertiary": "#A3B18A",
+            "tertiary-container": "#DAD7CD",
+            "on-primary": "#FFFFFF",
+            "on-primary-container": "#2D3A28",
+            "on-secondary-container": "#3A4238",
+            "on-tertiary-container": "#3A3E31",
+            "error": "#EF4444",
+            "error-container": "#FEE2E2",
+            "on-error-container": "#991B1B"
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            h1: ['Outfit', 'sans-serif'],
+            h2: ['Outfit', 'sans-serif'],
+            h3: ['Outfit', 'sans-serif'],
+            'body-md': ['Outfit', 'sans-serif'],
+            'body-lg': ['Outfit', 'sans-serif'],
+            'label-sm': ['Outfit', 'sans-serif'],
+            'data-mono': ['IBM Plex Mono', 'monospace'],
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+            'full': '9999px'
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+      </style>
+</head>
+<body class="bg-background font-sans text-on-background font-body-md text-body-md antialiased min-h-screen flex">
+<!-- JSON Component: SideNavBar -->
+<nav class="bg-white border-r border-slate-100 shadow-soft fixed left-0 top-0 h-full w-64 z-50 flex flex-col w-64 h-screen fixed left-0 top-0">
+<div class="p-6 border-b border-slate-100">
+<h2 class="text-xl font-extrabold text-slate-800 tracking-tighter">FestPass</h2>
+<p class=" text-sm tracking-wide text-primary">Organizer</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="overview.html">
+<span class="material-symbols-outlined mr-4">dashboard</span>Overview</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="fest%20management.html">
+<span class="material-symbols-outlined mr-4">confirmation_number</span>Fests</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="merchants.html">
+<span class="material-symbols-outlined mr-4">storefront</span>Merchants</a>
+<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="revenue%20and%20settlement.html">
+<span class="material-symbols-outlined mr-4" style="font-variation-settings: 'FILL' 1;">payments</span>Payments</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="QR%20code%20generator.html">
+<span class="material-symbols-outlined mr-4">qr_code_2</span>QR Codes</a>
+<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined mr-4">settings</span>Settings</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-sidebar-width flex flex-col min-h-screen">
+<!-- JSON Component: TopAppBar -->
+<header class="bg-white/80 bg-white/90 backdrop-blur-md sticky top-0 w-full z-40 border-b border-slate-200/30 dark:border-slate-100 shadow-sm flex items-center justify-between px-8 h-16 transition-all duration-300 w-[calc(100%-256px)]">
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+<input class="w-full bg-slate-50 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none  font-medium text-slate-600 dark:text-slate-500" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="ml-4 h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-white-container font-bold shadow-sm cursor-pointer border border-primary/20">
+                    O
+                </div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="p-lg md:p-xl flex-1 flex flex-col gap-gutter">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h1 class="font-h1 text-h1 text-on-surface">All Transactions</h1>
+<button onclick="exportDataToCSV('revenue')" class="bg-surface-container border border-outline-variant/30 text-on-surface font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-variant transition-colors flex items-center gap-2 uppercase tracking-wider self-start sm:self-auto">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export CSV
+                </button>
+</div>
+<!-- Summary Chips -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex items-center gap-4">
+<div class="bg-primary/10 text-primary p-3 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">Total Volume (FEST)</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-volume">2,450,000</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex items-center gap-4">
+<div class="bg-secondary/10 text-secondary p-3 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">Transaction Count</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-count">14,239</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex items-center gap-4">
+<div class="bg-tertiary/10 text-tertiary p-3 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_activity</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">Active Fests</p>
+<p class="font-data-mono text-[24px] font-semibold text-on-surface" id="stat-fests">3</p>
+</div>
+</div>
+</div>
+<!-- Filter Bar Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-md shadow-soft border-transparent flex flex-wrap items-center gap-4">
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full bg-slate-50 border border-outline-variant/50 rounded-full py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/50 outline-none" placeholder="Search merchant or wallet..." type="text"/>
+</div>
+<select class="bg-slate-50 border border-outline-variant/50 rounded-full py-2 px-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/50 outline-none min-w-[140px]">
+<option>All Fests</option>
+<option>Neon Nights 2024</option>
+<option>TechHouse Fest</option>
+</select>
+<select class="bg-slate-50 border border-outline-variant/50 rounded-full py-2 px-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/50 outline-none min-w-[140px]">
+<option>All Statuses</option>
+<option>Success</option>
+<option>Pending</option>
+<option>Failed</option>
+</select>
+<div class="relative min-w-[160px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">calendar_today</span>
+<input class="w-full bg-slate-50 border border-outline-variant/50 rounded-full py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/50 outline-none cursor-pointer" placeholder="Last 7 Days" type="text"/>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl shadow-soft border-transparent overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container border-b border-outline-variant/30">
+<tr>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Time</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Student Wallet</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Merchant</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Fest</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Amount</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center">Status</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Tx Hash</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20" id="tx-table-body">
+<!-- Row 1 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:32:01</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-primary truncate max-w-[120px]">0x7F2...8a9B</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface font-medium">Neon Burger Stand</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-primary/10 text-primary font-label-sm text-label-sm uppercase">Neon Nights</span>
+</td>
+<td class="py-4 px-4 font-h3 text-h3 text-[#10B981] text-right whitespace-nowrap">+ 15.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] font-label-sm text-label-sm gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Success
+                                    </span>
+</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-outline text-right truncate max-w-[100px]">0x9d3...f1a2</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:28:45</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-primary truncate max-w-[120px]">0x3A1...c4D2</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface font-medium">Cyber Merch Tent</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase">TechHouse</span>
+</td>
+<td class="py-4 px-4 font-h3 text-h3 text-[#10B981] text-right whitespace-nowrap">+ 45.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] font-label-sm text-label-sm gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Success
+                                    </span>
+</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-outline text-right truncate max-w-[100px]">0x2b1...e45c</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:25:10</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-primary truncate max-w-[120px]">0x9B4...1eF5</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface font-medium">VIP Lounge Bar</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-primary/10 text-primary font-label-sm text-label-sm uppercase">Neon Nights</span>
+</td>
+<td class="py-4 px-4 font-h3 text-h3 text-[#10B981] text-right whitespace-nowrap">+ 120.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] font-label-sm text-label-sm gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span> Pending
+                                    </span>
+</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-outline text-right truncate max-w-[100px]">0x5c4...8a1b</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:15:22</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-primary truncate max-w-[120px]">0x1C2...d5E4</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface font-medium">Glow Sticks &amp; More</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-primary/10 text-primary font-label-sm text-label-sm uppercase">Neon Nights</span>
+</td>
+<td class="py-4 px-4 font-h3 text-h3 text-[#EF4444] text-right whitespace-nowrap">- 8.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#FEE2E2] text-[#991B1B] font-label-sm text-label-sm gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span> Failed
+                                    </span>
+</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-outline text-right truncate max-w-[100px]">0x1a8...3c2d</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#F9F9FF] transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface whitespace-nowrap">Oct 24, 14:10:05</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-primary truncate max-w-[120px]">0x5D3...f6A1</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface font-medium">Main Stage Drinks</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-[4px] bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase">TechHouse</span>
+</td>
+<td class="py-4 px-4 font-h3 text-h3 text-[#10B981] text-right whitespace-nowrap">+ 22.50</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] font-label-sm text-label-sm gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Success
+                                    </span>
+</td>
+<td class="py-4 px-4 font-data-mono text-data-mono text-outline text-right truncate max-w-[100px]">0x7e2...9b4a</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="border-t border-outline-variant/30 p-4 bg-surface-container-lowest flex items-center justify-between">
+<p class="font-body-md text-body-md text-on-surface-variant" id="paging-info">Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">5</span> of <span class="font-semibold text-on-surface">14,239</span> results</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white-container font-label-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant font-label-sm">2</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant font-label-sm">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant font-label-sm">99</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/50 flex items-center justify-center text-on-surface hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+const API_BASE='http://localhost:4000/api';
+let currentPage=1, totalCount=0;
+async function loadStats(){
+  try {
+    const s = await fetch(API_BASE+'/transactions/stats').then(r=>r.json());
+    const el = id => document.getElementById(id);
+    if(el('stat-volume'))  el('stat-volume').textContent  = Number(s.totalVolume).toLocaleString();
+    if(el('stat-count'))   el('stat-count').textContent   = Number(s.txCount).toLocaleString();
+    if(el('stat-fests'))   el('stat-fests').textContent   = s.activeFests;
+  } catch(e){ console.warn('stats fallback',e); }
+}
+async function loadTransactions(page=1, search='', status='', fest=''){
+  try {
+    const qs = new URLSearchParams({page,limit:20,...(search&&{search}),...(status&&status!=='All Statuses'&&{status:status.toLowerCase()}),...(fest&&fest!=='All Fests'&&{fest_name:fest})}).toString();
+    const res = await fetch(API_BASE+'/transactions?'+qs).then(r=>r.json());
+    const txs = res.transactions||[];
+    totalCount = res.total||txs.length;
+    const tbody = document.getElementById('tx-table-body');
+    const paging= document.getElementById('paging-info');
+    if(paging) paging.textContent = `Showing ${(page-1)*20+1}–${Math.min(page*20,totalCount)} of ${Number(totalCount).toLocaleString()} results`;
+    tbody.innerHTML = txs.map(tx=>{
+      const dt = new Date(tx.created_at);
+      const time = dt.toLocaleString('en-IN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+      const sc = tx.status==='success'?'bg-[#D1FAE5] text-[#065F46]':tx.status==='pending'?'bg-[#FEF3C7] text-[#92400E]':'bg-[#FEE2E2] text-[#991B1B]';
+      const dot = tx.status==='success'?'bg-[#10B981]':tx.status==='pending'?'bg-[#F59E0B]':'bg-[#EF4444]';
+      const amt = tx.status==='failed'?'text-[#EF4444]':'text-[#10B981]';
+      return `<tr class="hover:bg-[#F9F9FF] transition-colors">
+        <td class="py-4 px-4 whitespace-nowrap">${time}</td>
+        <td class="py-4 px-4 font-mono text-xs text-primary truncate max-w-[120px]">${tx.student_wallet||'—'}</td>
+        <td class="py-4 px-4 font-medium">${tx.merchant_name||'—'}</td>
+        <td class="py-4 px-4"><span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-[10px] uppercase font-bold">${tx.fest_name||'—'}</span></td>
+        <td class="py-4 px-4 font-bold text-right ${amt} whitespace-nowrap">${tx.status==='failed'?'- ':''+ ''}${Number(tx.amount).toFixed(2)}</td>
+        <td class="py-4 px-4 text-center"><span class="inline-flex items-center px-2.5 py-1 rounded-full ${sc} text-[10px] font-bold gap-1"><span class="w-1.5 h-1.5 rounded-full ${dot}"></span>${tx.status.charAt(0).toUpperCase()+tx.status.slice(1)}</span></td>
+        <td class="py-4 px-4 font-mono text-xs text-outline text-right truncate max-w-[100px]">${tx.tx_hash||'—'}</td>
+      </tr>`;
+    }).join('');
+    if(!txs.length) tbody.innerHTML='<tr><td colspan="7" class="text-center py-10 text-on-surface-variant">No transactions found</td></tr>';
+  } catch(e){ console.warn('tx fallback',e); }
+}
+// Wire up filters
+document.addEventListener('DOMContentLoaded',()=>{
+  loadStats();
+  loadTransactions();
+  const searchEl = document.querySelector('input[placeholder="Search merchant or wallet..."]');
+  const statusEl = document.querySelectorAll('select')[1];
+  const festEl   = document.querySelectorAll('select')[0];
+  function refresh(){ loadTransactions(1, searchEl?.value||'', statusEl?.value||'', festEl?.value||''); }
+  searchEl?.addEventListener('input', refresh);
+  statusEl?.addEventListener('change', refresh);
+  festEl  ?.addEventListener('change', refresh);
+});
+</script>
+<script src="exportCsv.js"></script>
+</body></html>
