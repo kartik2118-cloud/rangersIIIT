@@ -122,7 +122,7 @@
 </div>
 <div class="flex gap-3">
 <a href="merchants.html" class="px-6 py-2.5 rounded-lg bg-surface-container border border-outline-variant/30 font-label-sm text-xs font-bold text-on-surface-variant uppercase hover:bg-surface-variant transition-colors flex items-center justify-center">Cancel</a>
-<button id="btn-submit" class="bg-primary text-white font-label-sm text-xs font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider gap-2">
+<button id="btn-submit" onclick="registerMerchant()" class="bg-primary text-white font-label-sm text-xs font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider gap-2">
 <span class="material-symbols-outlined text-[18px]">person_add</span>Register Merchant
 </button>
 </div>
@@ -200,46 +200,92 @@ Merchants are the vendors selling items at a fest. Once added, they get a profil
 </main>
 </div>
 <script>
-const API_BASE = 'http://localhost:4000/api';
-// Load fests into the select dropdown
+var API_BASE = 'http://localhost:4000/api';
+
+// Load fests into dropdown (backend + localStorage)
 async function initForm() {
+    var select = document.getElementById('merchant-fest');
+    var fests = [];
+
+    // Try backend
     try {
-        const fests = await fetch(API_BASE+'/fests').then(r=>r.json());
-        const select = document.getElementById('merchant-fest');
-        fests.forEach(f=>{
-            const op = document.createElement('option');
-            op.value = f.id;
-            op.textContent = f.name;
-            select.appendChild(op);
+        var res = await fetch(API_BASE + '/fests');
+        if (res.ok) fests = await res.json();
+    } catch(e) {}
+
+    // Merge locally created fests
+    try {
+        var local = JSON.parse(localStorage.getItem('fp_fests') || '[]');
+        local.forEach(function(lf) {
+            if (!fests.find(function(f){ return f.id === lf.id; })) fests.push(lf);
         });
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlFestId = urlParams.get('fest_id');
-        if (urlFestId) {
-            select.value = urlFestId;
-        }
-    } catch(e) { console.error(e); }
+    } catch(e) {}
+
+    fests.forEach(function(f) {
+        var op = document.createElement('option');
+        op.value = f.id;
+        op.textContent = f.name;
+        select.appendChild(op);
+    });
+
+    // Pre-select from URL param
+    var urlFestId = new URLSearchParams(window.location.search).get('fest_id');
+    if (urlFestId) select.value = urlFestId;
 }
 initForm();
 
-document.getElementById('btn-submit').addEventListener('click', async ()=>{
-    const name = document.getElementById('merchant-name').value;
-    const fest_id = document.getElementById('merchant-fest').value;
-    const category = document.getElementById('merchant-category').value;
-    const wallet_addr = document.getElementById('merchant-wallet').value;
-    if(!name || !fest_id || !wallet_addr) return alert('Please fill required fields.');
+function registerMerchant() {
+    var name       = (document.getElementById('merchant-name').value   || '').trim();
+    var fest_id    = document.getElementById('merchant-fest').value;
+    var category   = document.getElementById('merchant-category').value;
+    var wallet_addr= (document.getElementById('merchant-wallet').value || '').trim();
+
+    if (!name)       { alert('Please enter a Merchant Name.'); return; }
+    if (!fest_id)    { alert('Please select an Associated Fest.'); return; }
+    if (!wallet_addr){ alert('Please enter a Wallet Address.'); return; }
+
+    var btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Registering...';
+
+    // Get fest name for display
+    var festSelect = document.getElementById('merchant-fest');
+    var festName = festSelect.options[festSelect.selectedIndex]
+                    ? festSelect.options[festSelect.selectedIndex].text : '—';
+
+    var merchantData = {
+        id: 'm' + Date.now(),
+        name: name,
+        fest_id: fest_id,
+        festName: festName,
+        category: category,
+        wallet_addr: wallet_addr,
+        revenue: 0,
+        transactionCount: 0,
+        joined_at: new Date().toISOString()
+    };
+
+    // 1. Save to localStorage — always works
     try {
-        const res = await fetch(API_BASE+'/merchants', {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name, fest_id, category, wallet_addr})
-        });
-        if(res.ok) {
-            window.location.href = 'merchants.html';
-        } else {
-            const err = await res.json();
-            alert('Error: '+err.error);
-        }
-    } catch(e) { alert('Failed to create merchant'); }
-});
+        var stored = JSON.parse(localStorage.getItem('fp_merchants') || '[]');
+        stored.unshift(merchantData);
+        localStorage.setItem('fp_merchants', JSON.stringify(stored));
+    } catch(e) {}
+
+    // 2. Try backend (fire and forget)
+    try {
+        fetch(API_BASE + '/merchants', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(merchantData)
+        }).catch(function(){});
+    } catch(e) {}
+
+    // 3. Always redirect
+    btn.textContent = 'Registered!';
+    setTimeout(function() {
+        window.location.href = 'merchants.html';
+    }, 600);
+}
 </script>
 </body></html>

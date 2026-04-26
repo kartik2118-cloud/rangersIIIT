@@ -1,363 +1,258 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>FestPass - Fests Management</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          spacing: {
-            "xl": "40px",
-            "header-height": "68px",
-            "sm": "8px",
-            "xs": "4px",
-            "sidebar-width": "256px",
-            "md": "16px",
-            "lg": "24px",
-            "gutter": "24px"
-          },
-          colors: {
-            primary: "#97A97C",
-            "primary-container": "#CFDBD5",
-            secondary: "#B5C9B3",
-            "secondary-container": "#E8ECE6",
-            background: "#F8F9FA",
-            surface: "#FFFFFF",
-            "surface-container-lowest": "#FFFFFF",
-            "surface-container-low": "#F1F5F9",
-            "surface-container": "#E2E8F0",
-            "surface-container-high": "#CBD5E1",
-            "surface-container-highest": "#94A3B8",
-            "on-background": "#0F172A",
-            "on-surface": "#1E293B",
-            "on-surface-variant": "#475569",
-            outline: "#94A3B8",
-            "outline-variant": "#E2E8F0",
-            "inverse-surface": "#1E293B",
-            "inverse-on-surface": "#F8FAFC",
-            "tertiary": "#A3B18A",
-            "tertiary-container": "#DAD7CD",
-            "on-primary": "#FFFFFF",
-            "on-primary-container": "#2D3A28",
-            "on-secondary-container": "#3A4238",
-            "on-tertiary-container": "#3A3E31",
-            "error": "#EF4444",
-            "error-container": "#FEE2E2",
-            "on-error-container": "#991B1B"
-          },
-          fontFamily: {
-            sans: ['Outfit', 'sans-serif'],
-            h1: ['Outfit', 'sans-serif'],
-            h2: ['Outfit', 'sans-serif'],
-            h3: ['Outfit', 'sans-serif'],
-            'body-md': ['Outfit', 'sans-serif'],
-            'body-lg': ['Outfit', 'sans-serif'],
-            'label-sm': ['Outfit', 'sans-serif'],
-            'data-mono': ['IBM Plex Mono', 'monospace'],
-          },
-          borderRadius: {
-            'xl': '1rem',
-            '2xl': '1.5rem',
-            '3xl': '2rem',
-            'full': '9999px'
-          },
-          boxShadow: {
-            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
-          }
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;450;500&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary:"#97A97C","primary-container":"#CFDBD5",secondary:"#B5C9B3",
+          background:"#F8F9FA",surface:"#FFFFFF","surface-container-low":"#F1F5F9",
+          "surface-container":"#E2E8F0","on-surface":"#1E293B","on-surface-variant":"#475569",
+          outline:"#94A3B8","outline-variant":"#E2E8F0",error:"#EF4444"
         }
       }
     }
-  </script>
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
+.fest-card { transition: box-shadow 0.2s, transform 0.2s; }
+.fest-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.10); transform: translateY(-1px); }
+.badge-live { background:#dcfce7; color:#166534; }
+.badge-upcoming { background:#e0f2fe; color:#075985; }
+.badge-ended { background:#f1f5f9; color:#475569; }
+.filter-tab { transition: all 0.15s; }
+.filter-tab.active { background:#97A97C; color:white; }
+.filter-tab:not(.active) { background:#f1f5f9; color:#475569; }
+.filter-tab:not(.active):hover { background:#e2e8f0; }
+</style>
 </head>
-<body class="bg-background font-sans text-on-background font-body-md antialiased overflow-x-hidden">
-<!-- SideNavBar (Shared Component) -->
-<nav class="fixed left-0 top-0 h-full w-64 z-50 bg-white border-r border-slate-100 shadow-soft flex flex-col  text-sm tracking-wide">
-<!-- Brand Header -->
-<div class="px-6 py-8">
-<h1 class="text-xl font-extrabold text-slate-800 tracking-tighter flex items-center gap-2">
-<span class="w-8 h-8 rounded-2xl bg-gradient-to-br from-[#6A5CF6] to-purple-500 flex items-center justify-center shadow-lg shadow-[#6A5CF6]/30">
-<span class="material-symbols-outlined text-slate-800 text-lg" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
-</span>
-                FestPass
-            </h1>
-<p class="text-slate-500 text-xs mt-1 ml-10 uppercase tracking-widest font-semibold">Organizer</p>
-</div>
-<!-- Navigation Tabs -->
-<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
-<!-- Overview (Inactive) -->
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="overview.html">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">dashboard</span>Overview</a>
-<a class="border-l-4 border-primary bg-primary/10 text-slate-800 font-semibold flex items-center px-6 py-3 transition-all hover:bg-primary/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="fest%20management.html">
-<span class="material-symbols-outlined mr-3 text-primary" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>Fests</a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="merchants.html">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">storefront</span>Merchants</a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="revenue%20and%20settlement.html">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">payments</span>Payments</a>
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out group" href="QR%20code%20generator.html">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">qr_code_2</span>QR Codes</a>
-</div>
-<!-- Settings (Bottom anchored) -->
-<div class="p-4 border-t border-white/5">
-<a class="text-slate-500 flex items-center px-6 py-3 hover:text-slate-800 hover:bg-primary/5 transition-all hover:scale-[0.98] active:scale-95 duration-200 ease-in-out rounded-2xl group" href="#">
-<span class="material-symbols-outlined mr-3 text-slate-500 group-hover:text-slate-800 transition-colors">settings</span>
-                Settings
-            </a>
-</div>
-</nav>
-<!-- Main Content Wrapper -->
-<div class="ml-64 flex flex-col min-h-screen">
-<!-- TopAppBar (Shared Component) -->
-<header class="sticky top-0 w-full z-40 bg-white/80 bg-white/90 backdrop-blur-md border-b border-slate-200/30 dark:border-slate-100 shadow-sm flex items-center justify-between px-8 h-16 transition-all duration-300">
-<!-- Left: Product Name -->
-<div class="flex items-center gap-4">
-<h2 class=" font-medium text-slate-600 dark:text-slate-500">Organizer Dashboard</h2>
-</div>
-<!-- Right: Actions & Profile -->
-<div class="flex items-center gap-2">
-<!-- Trailing Icons -->
-<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center text-slate-600 dark:text-slate-500 hover:bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
-<span class="material-symbols-outlined">help_outline</span>
-</button>
-<!-- Profile Avatar -->
-<div class="w-8 h-8 rounded-full ml-4 overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:opacity-90 transition-opacity">
-<img alt="Organizer Profile" class="w-full h-full object-cover" data-alt="close up professional headshot of a smiling woman with dark hair in a well-lit modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7KwCgYhUm9h3YxaGxWY2aKnMEquGs3h6utB2FQyuBLWHUZ6g1tpxm-IQM8Zn9iRqeQz2uT9wprRzkA3uPN3t9v_xUNokntNGpcSgxm_f0Q5k_eWh-15cQJmJ4D6iRrn5U_z_HSOnECLLYtVGVANANoPF7Wka46U6MB4q8yeN3xik5-8-lCEC68-ZSKYV9SgfA2U9a8QzRRFogrzYooqx8KBct7RyHue-hF0_Fo2UYJ3T422FgQzjVcSKLcMOKgXVC0S3VHv8dGbU"/>
-</div>
-</div>
-</header>
-<!-- Page Content -->
-<main class="flex-1 p-lg md:p-xl flex flex-col gap-lg w-full max-w-7xl mx-auto">
-<!-- Page Header -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div>
-<h1 class="font-h1 text-h1 text-on-surface">Fests</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage your events, track performance, and coordinate merchants.</p>
-</div>
-<a href="create%20%20new%20event.html" class="bg-primary text-white font-label-sm text-label-sm px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider w-fit">
-<span class="material-symbols-outlined mr-2 text-[18px]">add</span>
-                    Create Fest
-                </a>
-</div>
-<!-- Row 1: Stat Summary Cards (Bento style) -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<!-- Stat Card 1 -->
-<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent flex flex-col gap-4 relative overflow-hidden group">
-<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-<div class="flex justify-between items-start">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total Active Fests</span>
-<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-[18px]">festival</span>
-</div>
-</div>
-<div>
-<span class="font-h2 text-h2 text-on-surface" data-fest="total">12</span>
-<span class="font-body-md text-body-md text-emerald-600 ml-2 text-sm bg-emerald-50 px-2 py-0.5 rounded-full">+2 this month</span>
-</div>
-</div>
-<!-- Stat Card 2 -->
-<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent flex flex-col gap-4 relative overflow-hidden group">
-<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary-container/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-<div class="flex justify-between items-start">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total Revenue</span>
-<div class="w-8 h-8 rounded-full bg-tertiary-container/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary text-[18px]">account_balance</span>
-</div>
-</div>
-<div>
-<span class="font-h2 text-h2 text-on-surface font-data-mono" data-fest="revenue">₹1.42M</span>
-<span class="font-body-md text-body-md text-emerald-600 ml-2 text-sm bg-emerald-50 px-2 py-0.5 rounded-full">+14.5%</span>
-</div>
-</div>
-<!-- Stat Card 3 -->
-<div class="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/30 shadow-soft border-transparent flex flex-col gap-4 relative overflow-hidden group">
-<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-<div class="flex justify-between items-start">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total Merchants</span>
-<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-secondary text-[18px]">storefront</span>
-</div>
-</div>
-<div>
-<span class="font-h2 text-h2 text-on-surface" data-fest="merchants">348</span>
-<span class="font-body-md text-body-md text-on-surface-variant ml-2 text-sm">Across all fests</span>
-</div>
-</div>
-</div>
-<!-- Row 2: Grid of Fest Cards -->
-<div class="mt-4">
-<h3 class="font-h3 text-h3 text-on-surface mb-6">Active &amp; Upcoming</h3>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter" id="fests-grid">
-<!-- Fest Card: Live -->
-<div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300">
-<div class="flex-1 flex border-l-4 border-l-primary">
-<div class="p-6 flex-1 flex flex-col gap-5">
-<!-- Card Header -->
-<div class="flex justify-between items-start gap-4">
-<div>
-<h4 class="font-h3 text-h3 text-on-surface">Neon Nights Music Festival</h4>
-<div class="flex items-center gap-3 mt-2 text-on-surface-variant">
-<div class="flex items-center gap-1 font-body-md text-body-md text-sm">
-<span class="material-symbols-outlined text-[16px]">calendar_today</span>
-                                                Oct 12 - 14, 2024
-                                            </div>
-<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-<div class="flex items-center gap-1 font-body-md text-body-md text-sm">
-<span class="material-symbols-outlined text-[16px]">location_on</span>
-                                                Austin, TX
-                                            </div>
-</div>
-</div>
-<span class="bg-primary-container text-white-container font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                                        Live
-                                    </span>
-</div>
-<!-- Stats Row -->
-<div class="grid grid-cols-3 gap-4 py-4 border-y border-outline-variant/20 bg-surface/50 -mx-6 px-6">
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Revenue</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">₹845k</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Merchants</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">124</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Transacts</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">42.5k</p>
-</div>
-</div>
-<!-- Actions -->
-<div class="flex items-center gap-3 mt-auto pt-2">
-<button class="flex-1 font-label-sm text-label-sm uppercase tracking-wide text-primary hover:bg-primary/5 py-2.5 rounded-2xl transition-colors border border-transparent">
-                                        View Details
-                                    </button>
-<button class="flex-1 font-label-sm text-label-sm uppercase tracking-wide text-on-surface border border-outline hover:bg-surface-variant py-2.5 rounded-2xl transition-colors">
-                                        Add Merchant
-                                    </button>
-</div>
-</div>
-</div>
-</div>
-<!-- Fest Card: Upcoming -->
-<div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft border-transparent overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300">
-<div class="flex-1 flex border-l-4 border-l-secondary">
-<div class="p-6 flex-1 flex flex-col gap-5">
-<!-- Card Header -->
-<div class="flex justify-between items-start gap-4">
-<div>
-<h4 class="font-h3 text-h3 text-on-surface">Winter Brew Fest 2024</h4>
-<div class="flex items-center gap-3 mt-2 text-on-surface-variant">
-<div class="flex items-center gap-1 font-body-md text-body-md text-sm">
-<span class="material-symbols-outlined text-[16px]">calendar_today</span>
-                                                Dec 05 - 07, 2024
-                                            </div>
-<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-<div class="flex items-center gap-1 font-body-md text-body-md text-sm">
-<span class="material-symbols-outlined text-[16px]">location_on</span>
-                                                Denver, CO
-                                            </div>
-</div>
-</div>
-<span class="bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full whitespace-nowrap">
-                                        Upcoming
-                                    </span>
-</div>
-<!-- Stats Row (Pre-sales) -->
-<div class="grid grid-cols-3 gap-4 py-4 border-y border-outline-variant/20 bg-surface/50 -mx-6 px-6 opacity-80">
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Pre-sales</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">₹120k</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Registered</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">85</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Target</p>
-<p class="font-data-mono text-data-mono font-medium text-on-surface">150</p>
-</div>
-</div>
-<!-- Actions -->
-<div class="flex items-center gap-3 mt-auto pt-2">
-<button class="flex-1 font-label-sm text-label-sm uppercase tracking-wide text-primary hover:bg-primary/5 py-2.5 rounded-2xl transition-colors border border-transparent">
-                                        View Details
-                                    </button>
-<button class="flex-1 font-label-sm text-label-sm uppercase tracking-wide text-on-surface border border-outline hover:bg-surface-variant py-2.5 rounded-2xl transition-colors">
-                                        Add Merchant
-                                    </button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<script>
-const API_BASE='http://localhost:4000/api';
-async function loadFests(){
-  try {
-    const fests = await fetch(API_BASE+'/fests').then(r=>r.json());
-    const stats = { total:fests.length, revenue:fests.reduce((s,f)=>s+(f.revenue||0),0), merchants:fests.reduce((s,f)=>s+(f.merchantCount||0),0) };
-    const el = n => document.querySelector(`[data-fest="${n}"]`);
-    if(el('total'))    el('total').textContent    = stats.total;
-    if(el('revenue'))  el('revenue').textContent  = '₹'+Number(stats.revenue/1000).toFixed(0)+'k';
-    if(el('merchants'))el('merchants').textContent = stats.merchants;
-    const grid = document.getElementById('fests-grid');
-    if(grid && fests.length) {
-      const statusBadge = s => s==='live'?'<span class="bg-primary-container text-slate-800 font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>Live</span>':
-        s==='upcoming'?'<span class="bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Upcoming</span>':
-        '<span class="bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Ended</span>';
-      const borderColor = s => s==='live'?'border-l-primary':s==='upcoming'?'border-l-secondary':'border-l-outline';
-      grid.innerHTML = fests.map(f=>`
-        <div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-soft overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300">
-          <div class="flex-1 flex border-l-4 ${borderColor(f.status)}">
-            <div class="p-6 flex-1 flex flex-col gap-5">
-              <div class="flex justify-between items-start gap-4">
-                <div>
-                  <h4 class="font-h3 text-h3 text-on-surface">${f.name}</h4>
-                  <div class="flex items-center gap-3 mt-2 text-on-surface-variant">
-                    <div class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]">calendar_today</span>${f.start_date} – ${f.end_date}</div>
-                    <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-                    <div class="flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]">location_on</span>${f.location||'TBD'}</div>
-                  </div>
-                </div>
-                ${statusBadge(f.status)}
-              </div>
-              <div class="grid grid-cols-3 gap-4 py-4 border-y border-outline-variant/20">
-                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Revenue</p><p class="font-data-mono font-medium">₹${Number((f.revenue||0)/1000).toFixed(0)}k</p></div>
-                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Merchants</p><p class="font-data-mono font-medium">${f.merchantCount||0}</p></div>
-                <div><p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Transacts</p><p class="font-data-mono font-medium">${Number(f.transactionCount||0).toLocaleString()}</p></div>
-              </div>
-              <div class="flex items-center gap-3">
-<a href="merchants.html?fest_id=${f.id}" class="flex-1 flex justify-center items-center font-label-sm uppercase tracking-wide text-primary hover:bg-primary/5 py-2.5 rounded-2xl transition-colors border border-transparent">View Details</a>
-<a href="add%20merchant.html?fest_id=${f.id}" class="flex-1 flex justify-center items-center font-label-sm uppercase tracking-wide text-on-surface border border-outline hover:bg-surface-variant py-2.5 rounded-2xl transition-colors">Add Merchant</a>
-</div>
-            </div>
+<body class="bg-[#F8F9FA] text-[#1E293B] min-h-screen flex">
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-slate-950 border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#CFDBD5] to-[#97A97C] flex items-center justify-center shadow-lg">
+      <span class="material-symbols-outlined text-white">confirmation_number</span>
+    </div>
+    <div>
+      <h1 class="text-xl font-extrabold text-white tracking-tighter">FestPass</h1>
+      <p class="text-xs text-[#CFDBD5] font-semibold tracking-wider uppercase">Organizer</p>
+    </div>
+  </div>
+  <nav class="flex-1 mt-6 flex flex-col gap-1 px-3">
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="overview.html">
+      <span class="material-symbols-outlined mr-3 text-lg">dashboard</span>Overview</a>
+    <a class="border-l-4 border-[#6A5CF6] bg-white/10 text-white font-semibold flex items-center px-6 py-3 rounded-r-lg text-sm tracking-wide" href="fest%20management.html">
+      <span class="material-symbols-outlined mr-3 text-lg text-[#6A5CF6]" style="font-variation-settings:'FILL' 1">confirmation_number</span>Fests</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="merchants.html">
+      <span class="material-symbols-outlined mr-3 text-lg">storefront</span>Merchants</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="revenue%20and%20settlement.html">
+      <span class="material-symbols-outlined mr-3 text-lg">payments</span>Payments</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="QR%20code%20generator.html">
+      <span class="material-symbols-outlined mr-3 text-lg">qr_code_2</span>QR Codes</a>
+  </nav>
+  <a class="text-slate-400 flex items-center px-9 py-4 hover:text-red-400 hover:bg-white/5 transition-all text-sm tracking-wide border-t border-white/10 mt-auto" href="login.html">
+    <span class="material-symbols-outlined mr-3 text-lg">logout</span>Log Out</a>
+</aside>
+
+<!-- Main -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/50 shadow-sm flex items-center justify-between px-8 h-[68px]">
+    <h2 class="font-bold text-lg text-[#1E293B]">Fests Management</h2>
+    <div class="flex items-center gap-3">
+      <button class="p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+        <span class="material-symbols-outlined">notifications</span></button>
+      <div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm">
+        <img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwuoibeuccZ2oNDjOI-DeZRsHHurNieTHC_vpIIRL28FLssIw5OH8gu34jipxMrQOkyfPHN10itfIAsGOvllOZfpB97jD-5BvLJQ53M4YGk08PU7xq01gt9WPq_zU2SlakcJAGoXC9QO2Yu5Xtd0lOjZj12y0ORsHO8csPZnRRIbJWsr4va4xvzLoekbM9o9Wccw0UmAEQob12ZZI-7oCflkQDV4rPDIfFaq7CSQZNpnHtBMjyTbNy31WU0cJOdvVjJ81lrEBtE3k"/>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 p-8 max-w-7xl mx-auto w-full">
+
+    <!-- Page Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-[#1E293B]">Your Fests</h1>
+        <p class="text-[#475569] text-sm mt-1">Manage events, track performance, and coordinate merchants.</p>
+      </div>
+      <a href="create%20%20new%20event.html" class="bg-[#97A97C] text-white font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-[#7a9062] transition-all flex items-center gap-2 uppercase tracking-wide text-sm w-fit">
+        <span class="material-symbols-outlined text-[18px]">add</span>Create Fest
+      </a>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-soft">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-bold text-[#475569] uppercase tracking-widest">Total Fests</span>
+          <div class="w-8 h-8 rounded-full bg-[#CFDBD5]/30 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#97A97C] text-[18px]">confirmation_number</span>
           </div>
-        </div>`).join('');
-    }
-  } catch(e){ console.warn('API fallback', e); }
+        </div>
+        <span id="stat-total" class="text-3xl font-bold text-[#1E293B]">—</span>
+        <span class="text-xs text-[#475569] ml-2">all time</span>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-soft">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-bold text-[#475569] uppercase tracking-widest">Total Revenue</span>
+          <div class="w-8 h-8 rounded-full bg-[#CFDBD5]/30 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#97A97C] text-[18px]">account_balance</span>
+          </div>
+        </div>
+        <span id="stat-revenue" class="text-3xl font-bold text-[#1E293B]">—</span>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-soft">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-bold text-[#475569] uppercase tracking-widest">Total Merchants</span>
+          <div class="w-8 h-8 rounded-full bg-[#CFDBD5]/30 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#97A97C] text-[18px]">storefront</span>
+          </div>
+        </div>
+        <span id="stat-merchants" class="text-3xl font-bold text-[#1E293B]">—</span>
+        <span class="text-xs text-[#475569] ml-2">across all fests</span>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="flex items-center gap-2 mb-6">
+      <button onclick="filterFests('all')" id="tab-all" class="filter-tab active px-4 py-2 rounded-full text-sm font-semibold">All</button>
+      <button onclick="filterFests('live')" id="tab-live" class="filter-tab px-4 py-2 rounded-full text-sm font-semibold">🟢 Live</button>
+      <button onclick="filterFests('upcoming')" id="tab-upcoming" class="filter-tab px-4 py-2 rounded-full text-sm font-semibold">🔵 Upcoming</button>
+      <button onclick="filterFests('ended')" id="tab-ended" class="filter-tab px-4 py-2 rounded-full text-sm font-semibold">⚫ Ended</button>
+    </div>
+
+    <!-- Fests Grid -->
+    <div id="fests-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- Loaded by JS -->
+      <div class="col-span-2 text-center py-16 text-[#475569]">
+        <span class="material-symbols-outlined text-5xl text-slate-300 block mb-3">hourglass_empty</span>
+        Loading fests...
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+var API_BASE = 'http://localhost:4000/api';
+var allFests = [];
+var currentFilter = 'all';
+
+// Demo fests (always available as fallback)
+var DEMO_FESTS = [
+  { id:'f1', name:'Neon Nights Music Festival', location:'Austin, TX',    start_date:'2024-10-12', end_date:'2024-10-14', status:'live',     merchantCount:124, transactionCount:42500, revenue:845000 },
+  { id:'f2', name:'Winter Brew Fest 2024',       location:'Denver, CO',   start_date:'2024-12-05', end_date:'2024-12-07', status:'upcoming', merchantCount:85,  transactionCount:0,     revenue:120000 },
+  { id:'f3', name:'Summer Solstice',             location:'Miami, FL',    start_date:'2024-06-20', end_date:'2024-06-22', status:'ended',    merchantCount:210, transactionCount:28000, revenue:580000 },
+  { id:'f4', name:'TechHouse Fest',              location:'San Francisco', start_date:'2024-09-01', end_date:'2024-09-03', status:'ended',   merchantCount:67,  transactionCount:12400, revenue:245000 }
+];
+
+function getBadge(status) {
+  if (status === 'live')     return '<span class="badge-live text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-600 animate-pulse inline-block"></span>Live</span>';
+  if (status === 'upcoming') return '<span class="badge-upcoming text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Upcoming</span>';
+  return '<span class="badge-ended text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Ended</span>';
 }
+
+function getBorderColor(status) {
+  if (status === 'live')     return '#22c55e';
+  if (status === 'upcoming') return '#97A97C';
+  return '#e2e8f0';
+}
+
+function fmt(n) {
+  if (n >= 1000000) return '₹' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '₹' + (n/1000).toFixed(0) + 'k';
+  return '₹' + n;
+}
+
+function renderFests(fests) {
+  var grid = document.getElementById('fests-grid');
+  if (!fests.length) {
+    grid.innerHTML = '<div class="col-span-2 text-center py-16 text-[#475569]"><span class="material-symbols-outlined text-5xl text-slate-300 block mb-3">event_busy</span>No fests found. <a href="create%20%20new%20event.html" class="text-[#97A97C] font-semibold hover:underline">Create one now →</a></div>';
+    return;
+  }
+  grid.innerHTML = fests.map(function(f) {
+    return '<div class="fest-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-soft" style="border-left:4px solid ' + getBorderColor(f.status) + '">' +
+      '<div class="p-6">' +
+        '<div class="flex justify-between items-start gap-4 mb-4">' +
+          '<div>' +
+            '<h3 class="text-lg font-bold text-[#1E293B] mb-1">' + f.name + '</h3>' +
+            '<div class="flex flex-wrap items-center gap-3 text-[#475569] text-xs">' +
+              '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span>' + f.start_date + ' – ' + f.end_date + '</span>' +
+              '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span>' + (f.location || 'TBD') + '</span>' +
+            '</div>' +
+          '</div>' +
+          getBadge(f.status) +
+        '</div>' +
+        '<div class="grid grid-cols-3 gap-3 py-4 border-t border-b border-slate-100 mb-4">' +
+          '<div><p class="text-[10px] text-[#475569] uppercase font-bold mb-1">Revenue</p><p class="font-bold text-[#1E293B] font-mono">' + fmt(f.revenue||0) + '</p></div>' +
+          '<div><p class="text-[10px] text-[#475569] uppercase font-bold mb-1">Merchants</p><p class="font-bold text-[#1E293B]">' + (f.merchantCount||0) + '</p></div>' +
+          '<div><p class="text-[10px] text-[#475569] uppercase font-bold mb-1">Transactions</p><p class="font-bold text-[#1E293B]">' + Number(f.transactionCount||0).toLocaleString() + '</p></div>' +
+        '</div>' +
+        '<div class="flex gap-3">' +
+          '<a href="merchants.html?fest_id=' + f.id + '" class="flex-1 text-center py-2.5 rounded-xl text-[#97A97C] font-semibold text-sm border border-[#97A97C]/30 hover:bg-[#97A97C]/5 transition-colors">View Details</a>' +
+          '<a href="add%20merchant.html?fest_id=' + f.id + '" class="flex-1 text-center py-2.5 rounded-xl text-[#475569] font-semibold text-sm border border-slate-200 hover:bg-slate-50 transition-colors">Add Merchant</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function filterFests(status) {
+  currentFilter = status;
+  // Update tabs
+  ['all','live','upcoming','ended'].forEach(function(t) {
+    var tab = document.getElementById('tab-' + t);
+    if (tab) tab.classList[t === status ? 'add' : 'remove']('active');
+  });
+  var filtered = status === 'all' ? allFests : allFests.filter(function(f) { return f.status === status; });
+  renderFests(filtered);
+}
+
+async function loadFests() {
+  // Start with demo data
+  var fests = DEMO_FESTS.slice();
+
+  // Try to get from backend
+  try {
+    var res = await fetch(API_BASE + '/fests');
+    if (res.ok) {
+      var data = await res.json();
+      if (Array.isArray(data) && data.length) fests = data;
+    }
+  } catch(e) { /* use demo */ }
+
+  // Merge locally created fests from localStorage
+  try {
+    var local = JSON.parse(localStorage.getItem('fp_fests') || '[]');
+    local.forEach(function(lf) {
+      if (!fests.find(function(f) { return f.id === lf.id; })) {
+        fests.unshift(lf);
+      }
+    });
+  } catch(e) { /* ignore */ }
+
+  allFests = fests;
+
+  // Update stats
+  document.getElementById('stat-total').textContent = fests.length;
+  document.getElementById('stat-revenue').textContent = fmt(fests.reduce(function(s,f){ return s+(f.revenue||0); }, 0));
+  document.getElementById('stat-merchants').textContent = fests.reduce(function(s,f){ return s+(f.merchantCount||0); }, 0);
+
+  renderFests(fests);
+}
+
 loadFests();
 </script>
-</body></html>
+</body>
+</html>

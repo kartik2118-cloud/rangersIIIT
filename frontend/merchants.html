@@ -343,7 +343,22 @@ async function loadMerchants(){
   try {
     const params = new URLSearchParams(window.location.search);
     const url = API_BASE+'/merchants'+(params.toString()?'?'+params.toString():'');
-    const merchants = await fetch(url).then(r=>r.json());
+
+    // Get from backend
+    var merchants = [];
+    try {
+      const res = await fetch(url);
+      if (res.ok) merchants = await res.json();
+    } catch(e) { console.warn('Backend offline, using local only'); }
+
+    // Merge locally added merchants from localStorage
+    try {
+      const local = JSON.parse(localStorage.getItem('fp_merchants') || '[]');
+      local.forEach(lm => {
+        if (!merchants.find(m => m.id === lm.id)) merchants.unshift(lm);
+      });
+    } catch(e) {}
+
     const grid = document.getElementById('merchant-grid');
     if(grid && merchants.length){
       grid.innerHTML = merchants.map(m=>{
@@ -394,8 +409,10 @@ async function loadMerchants(){
           </button>
         </div>`;
       }).join('');
+    } else if (grid) {
+      grid.innerHTML = '<div class="col-span-full text-center py-16 text-on-surface-variant"><span class="material-symbols-outlined text-5xl text-outline block mb-3">storefront</span>No merchants yet. <a href="add%20merchant.html" class="text-primary font-semibold hover:underline">Add one now →</a></div>';
     }
-  } catch(e){ console.warn('API fallback',e); }
+  } catch(e){ console.warn('loadMerchants error',e); }
 }
 loadMerchants();
 // Search & filter wiring

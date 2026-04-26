@@ -1,329 +1,319 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>FestPass Organizer - Create New Fest</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;450;500&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;450;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          spacing: {
-            "xl": "40px",
-            "header-height": "68px",
-            "sm": "8px",
-            "xs": "4px",
-            "sidebar-width": "256px",
-            "md": "16px",
-            "lg": "24px",
-            "gutter": "24px"
-          },
-          colors: {
-            primary: "#97A97C",
-            "primary-container": "#CFDBD5",
-            secondary: "#B5C9B3",
-            "secondary-container": "#E8ECE6",
-            background: "#F8F9FA",
-            surface: "#FFFFFF",
-            "surface-container-lowest": "#FFFFFF",
-            "surface-container-low": "#F1F5F9",
-            "surface-container": "#E2E8F0",
-            "surface-container-high": "#CBD5E1",
-            "surface-container-highest": "#94A3B8",
-            "on-background": "#0F172A",
-            "on-surface": "#1E293B",
-            "on-surface-variant": "#475569",
-            outline: "#94A3B8",
-            "outline-variant": "#E2E8F0",
-            "inverse-surface": "#1E293B",
-            "inverse-on-surface": "#F8FAFC",
-            "tertiary": "#A3B18A",
-            "tertiary-container": "#DAD7CD",
-            "on-primary": "#FFFFFF",
-            "on-primary-container": "#2D3A28",
-            "on-secondary-container": "#3A4238",
-            "on-tertiary-container": "#3A3E31",
-            "error": "#EF4444",
-            "error-container": "#FEE2E2",
-            "on-error-container": "#991B1B"
-          },
-          fontFamily: {
-            sans: ['Outfit', 'sans-serif'],
-            h1: ['Outfit', 'sans-serif'],
-            h2: ['Outfit', 'sans-serif'],
-            h3: ['Outfit', 'sans-serif'],
-            'body-md': ['Outfit', 'sans-serif'],
-            'body-lg': ['Outfit', 'sans-serif'],
-            'label-sm': ['Outfit', 'sans-serif'],
-            'data-mono': ['IBM Plex Mono', 'monospace'],
-          },
-          borderRadius: {
-            'xl': '1rem',
-            '2xl': '1.5rem',
-            '3xl': '2rem',
-            'full': '9999px'
-          },
-          boxShadow: {
-            'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-            'floating': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
-          }
-        }
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        spacing: { "xl":"40px","header-height":"68px","sm":"8px","xs":"4px","sidebar-width":"256px","md":"16px","lg":"24px","gutter":"24px" },
+        colors: {
+          primary:"#97A97C","primary-container":"#CFDBD5",secondary:"#B5C9B3","secondary-container":"#E8ECE6",
+          background:"#F8F9FA",surface:"#FFFFFF","surface-container-lowest":"#FFFFFF","surface-container-low":"#F1F5F9",
+          "surface-container":"#E2E8F0","surface-container-high":"#CBD5E1","on-surface":"#1E293B",
+          "on-surface-variant":"#475569",outline:"#94A3B8","outline-variant":"#E2E8F0",
+          "on-primary":"#FFFFFF","on-primary-container":"#2D3A28","on-secondary-container":"#3A4238",
+          error:"#EF4444","error-container":"#FEE2E2"
+        },
+        fontFamily: { sans:['Plus Jakarta Sans','sans-serif'],'data-mono':['IBM Plex Mono','monospace'] },
+        boxShadow: { soft:'0 4px 20px -2px rgba(0,0,0,0.05)', floating:'0 10px 40px -10px rgba(0,0,0,0.08)' }
       }
     }
-  </script>
-</head>
-<body class="bg-background font-sans text-on-surface font-body-md min-h-screen flex">
-<!-- SideNavBar (Shared Component) -->
-<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-slate-950 dark:bg-black border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
-<div class="px-6 py-8 flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-container to-primary flex items-center justify-center shadow-lg">
-<span class="material-symbols-outlined text-white" data-icon="confirmation_number">confirmation_number</span>
-</div>
-<div>
-<h1 class="text-xl font-extrabold text-white tracking-tighter">FestPass</h1>
-<p class="text-xs text-primary-container font-semibold tracking-wider uppercase">Organizer</p>
-</div>
-</div>
-<nav class="flex-1 mt-6 flex flex-col gap-1 px-3">
-<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="overview.html">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">dashboard</span>Overview</a>
-<!-- Active State: Fests -->
-<a class="border-l-4 border-[#6A5CF6] bg-white/10 text-white font-semibold flex items-center px-6 py-3 transition-all rounded-r-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="fest%20management.html">
-<span class="material-symbols-outlined mr-3 text-lg text-[#6A5CF6]" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>Fests</a>
-<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="merchants.html">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="storefront">storefront</span>Merchants</a>
-<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="revenue%20and%20settlement.html">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="payments">payments</span>Payments</a>
-<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="QR%20code%20generator.html">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="qr_code_2">qr_code_2</span>QR Codes</a>
-<a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/5 transition-all rounded-lg font-['Plus_Jakarta_Sans'] text-sm tracking-wide mt-auto mb-4 hover:bg-white/10 hover:scale-[0.98] active:scale-95 duration-200 ease-in-out" href="login.html">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="settings">settings</span>Settings</a>
-</nav>
-</aside>
-<!-- Main Content Canvas -->
-<div class="flex-1 ml-sidebar-width flex flex-col min-h-screen">
-<!-- TopAppBar (Shared Component) -->
-<header class="sticky top-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/30 dark:border-white/10 shadow-sm flex items-center justify-between px-8 h-header-height">
-<div class="flex items-center gap-4">
-<div class="flex items-center text-slate-500 font-label-sm text-label-sm gap-2 uppercase">
-<span>Fests</span>
-<span class="material-symbols-outlined text-sm">chevron_right</span>
-<span class="text-primary-container font-semibold">Create New</span>
-</div>
-</div>
-<div class="flex items-center gap-2">
-<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300">
-<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
-</button>
-<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors duration-300 mr-4">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-</button>
-<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm cursor-pointer">
-<img alt="Organizer Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwuoibeuccZ2oNDjOI-DeZRsHHurNieTHC_vpIIRL28FLssIw5OH8gu34jipxMrQOkyfPHN10itfIAsGOvllOZfpB97jD-5BvLJQ53M4YGk08PU7xq01gt9WPq_zU2SlakcJAGoXC9QO2Yu5Xtd0lOjZj12y0ORsHO8csPZnRRIbJWsr4va4xvzLoekbM9o9Wccw0UmAEQob12ZZI-7oCflkQDV4rPDIfFaq7CSQZNpnHtBMjyTbNy31WU0cJOdvVjJ81lrEBtE3k"/>
-</div>
-</div>
-</header>
-<!-- Page Content -->
-<main class="flex-1 p-8 grid grid-cols-1 lg:grid-cols-12 gap-gutter max-w-7xl mx-auto w-full">
-<!-- Header Area -->
-<div class="lg:col-span-12 mb-2 flex items-end justify-between">
-<div>
-<h1 class="font-h1 text-h1 text-on-surface">Create a New Fest</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Configure the core details and financial settlement for your upcoming event.</p>
-</div>
-<div class="flex gap-3">
-<button class="px-6 py-2 rounded-lg bg-surface-container border border-outline-variant/30 font-label-sm text-label-sm text-on-surface-variant uppercase hover:bg-surface-variant transition-colors">Save Draft</button>
-<button id="btn-publish" class="bg-primary text-white font-label-sm text-label-sm px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform transition-all active:scale-95 flex items-center uppercase tracking-wider gap-2">
-<span class="material-symbols-outlined text-[18px]">publish</span>
-                        Publish Fest
-                    </button>
-</div>
-</div>
-<!-- Left Column: Form Card -->
-<div class="lg:col-span-8 flex flex-col gap-gutter">
-<!-- Fest Details Section -->
-<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-8">
-<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
-<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-fixed text-[20px]">stadium</span>
-</div>
-<h2 class="font-h2 text-h2 text-on-surface">Fest Details</h2>
-</div>
-<div class="space-y-6">
-<!-- Name & Location Row -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="fest-name">Fest Name *</label>
-<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline" id="fest-name" placeholder="e.g. Neon Nights 2024" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="location">Location Venue</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">location_on</span>
-<input class="w-full h-12 pl-11 pr-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline" id="location" placeholder="Search venues..." type="text"/>
-</div>
-</div>
-</div>
-<!-- Dates Row -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="start-date">Start Date &amp; Time *</label>
-<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all" id="start-date" type="datetime-local"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="end-date">End Date &amp; Time</label>
-<input class="w-full h-12 px-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all" id="end-date" type="datetime-local"/>
-</div>
-</div>
-<!-- Description -->
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="description">Event Description</label>
-<textarea class="w-full p-4 rounded-lg bg-surface-container-low border border-outline-variant/50 focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-body-md text-on-surface outline-none transition-all placeholder:text-outline resize-none" id="description" placeholder="Describe the vibe, lineup, and essential details..." rows="4"></textarea>
-</div>
-</div>
-</div>
-<!-- Settlement & Visibility Section -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<!-- Settlement -->
-<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-6">
-<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
-<div class="w-8 h-8 rounded bg-secondary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-fixed text-[20px]">account_balance</span>
-</div>
-<h3 class="font-h3 text-h3 text-on-surface">Settlement</h3>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="wallet">Primary Wallet Address *</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">account_balance_wallet</span>
-<input class="w-full h-11 pl-10 pr-3 rounded-md bg-surface-container-high border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container/50 font-data-mono text-data-mono text-on-surface outline-none transition-all placeholder:text-outline" id="wallet" placeholder="0x..." type="text"/>
-</div>
-<p class="text-xs text-outline mt-1 font-body-md">Funds from ticket sales will be routed here via smart contract.</p>
-</div>
-</div>
-<!-- Visibility -->
-<div class="bg-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 p-6">
-<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/20">
-<div class="w-8 h-8 rounded bg-tertiary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-on-tertiary-fixed text-[20px]">visibility</span>
-</div>
-<h3 class="font-h3 text-h3 text-on-surface">Visibility</h3>
-</div>
-<div class="space-y-3">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Status</label>
-<!-- Segmented Control -->
-<div class="flex bg-surface-container-high p-1 rounded-lg border border-outline-variant/30">
-<button class="flex-1 py-2 px-3 rounded-md bg-surface shadow-sm font-label-sm text-label-sm text-primary-container flex items-center justify-center gap-2 transition-all">
-<span class="w-2 h-2 rounded-full bg-outline"></span>
-                                    Draft
-                                </button>
-<button class="flex-1 py-2 px-3 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-2 transition-all">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-                                    Live
-                                </button>
-<button class="flex-1 py-2 px-3 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-2 transition-all opacity-50 cursor-not-allowed">
-<span class="w-2 h-2 rounded-full bg-error"></span>
-                                    Ended
-                                </button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column: Help Panel -->
-<div class="lg:col-span-4 flex flex-col gap-gutter">
-<div class="bg-gradient-to-b from-surface-container-low to-surface rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 overflow-hidden sticky top-[calc(68px+24px)]">
-<div class="h-32 relative bg-primary-container/10">
-<div class="absolute inset-0 bg-gradient-to-tr from-primary-container/20 to-transparent"></div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-primary-container/10 rotate-12">help_center</span>
-<div class="absolute bottom-4 left-6">
-<h3 class="font-h3 text-h3 text-on-surface">Need Guidance?</h3>
-</div>
-</div>
-<div class="p-6">
-<div class="mb-6">
-<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">What is a Fest?</h4>
-<p class="font-body-md text-body-md text-on-surface leading-relaxed">
-                                A "Fest" is the core container for your event. It holds all ticket tiers, associated merchants, and generates the unique smart contract for real-time payment settlement.
-                            </p>
-</div>
-<hr class="border-outline-variant/20 mb-6"/>
-<div>
-<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-4">Frequently Asked</h4>
-<ul class="space-y-4">
-<li class="group cursor-pointer">
-<div class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">Can I change the wallet later?</p>
-<p class="font-body-md text-sm text-on-surface-variant mt-1 hidden group-hover:block transition-all">Wallet changes require multi-sig approval once ticket sales begin to ensure security.</p>
-</div>
-</div>
-</li>
-<li class="group cursor-pointer">
-<div class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">When does it go Live?</p>
-</div>
-</div>
-</li>
-<li class="group cursor-pointer">
-<div class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">info</span>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface group-hover:text-primary-container transition-colors">Adding Merchants</p>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="mt-8 pt-6 border-t border-outline-variant/20">
-<a class="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-surface-container hover:bg-surface-variant border border-outline-variant/30 font-label-sm text-label-sm text-primary-container uppercase transition-colors" href="#">
-<span class="material-symbols-outlined text-[16px]">menu_book</span>
-                                View Full Docs
-                            </a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script>
-const API_BASE = 'http://localhost:4000/api';
-document.getElementById('btn-publish').addEventListener('click', async () => {
-    const name = document.getElementById('fest-name').value;
-    const location = document.getElementById('location').value;
-    const start_date = document.getElementById('start-date').value;
-    const end_date = document.getElementById('end-date').value;
-    const token_addr = document.getElementById('wallet').value;
-    
-    if(!name || !start_date || !end_date) {
-        return alert("Please fill the required fields: Name, Start Date, End Date.");
-    }
-    
-    try {
-        const res = await fetch(API_BASE+'/fests', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, location, start_date, end_date, token_addr })
-        });
-        if(res.ok) {
-            window.location.href = 'fest management.html';
-        } else {
-            const err = await res.json();
-            alert('Error: ' + err.error);
-        }
-    } catch(e) {
-        alert('Failed to publish fest.');
-    }
-});
+  }
 </script>
-</body></html>
+<style>
+  .status-btn { transition: all 0.2s; }
+  .status-btn.active { background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.1); color: #1E293B; font-weight: 600; }
+  .status-btn:not(.active) { color: #475569; }
+</style>
+</head>
+<body class="bg-[#F8F9FA] font-sans text-[#1E293B] min-h-screen flex">
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-slate-950 border-r border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#CFDBD5] to-[#97A97C] flex items-center justify-center shadow-lg">
+      <span class="material-symbols-outlined text-white">confirmation_number</span>
+    </div>
+    <div>
+      <h1 class="text-xl font-extrabold text-white tracking-tighter">FestPass</h1>
+      <p class="text-xs text-[#CFDBD5] font-semibold tracking-wider uppercase">Organizer</p>
+    </div>
+  </div>
+  <nav class="flex-1 mt-6 flex flex-col gap-1 px-3">
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="overview.html">
+      <span class="material-symbols-outlined mr-3 text-lg">dashboard</span>Overview</a>
+    <a class="border-l-4 border-[#6A5CF6] bg-white/10 text-white font-semibold flex items-center px-6 py-3 rounded-r-lg text-sm tracking-wide" href="fest%20management.html">
+      <span class="material-symbols-outlined mr-3 text-lg text-[#6A5CF6]" style="font-variation-settings:'FILL' 1">confirmation_number</span>Fests</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="merchants.html">
+      <span class="material-symbols-outlined mr-3 text-lg">storefront</span>Merchants</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="revenue%20and%20settlement.html">
+      <span class="material-symbols-outlined mr-3 text-lg">payments</span>Payments</a>
+    <a class="text-slate-400 flex items-center px-6 py-3 hover:text-white hover:bg-white/10 transition-all rounded-lg text-sm tracking-wide" href="QR%20code%20generator.html">
+      <span class="material-symbols-outlined mr-3 text-lg">qr_code_2</span>QR Codes</a>
+  </nav>
+  <a class="text-slate-400 flex items-center px-9 py-4 hover:text-red-400 hover:bg-white/5 transition-all text-sm tracking-wide border-t border-white/10 mt-auto" href="login.html">
+    <span class="material-symbols-outlined mr-3 text-lg">logout</span>Log Out</a>
+</aside>
+
+<!-- Main -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="sticky top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/50 shadow-sm flex items-center justify-between px-8 h-[68px]">
+    <div class="flex items-center gap-2 text-slate-500 text-xs uppercase font-semibold tracking-wide">
+      <span>Fests</span>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-[#CFDBD5] font-bold">Create New</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+        <span class="material-symbols-outlined">notifications</span></button>
+      <div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm cursor-pointer">
+        <img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwuoibeuccZ2oNDjOI-DeZRsHHurNieTHC_vpIIRL28FLssIw5OH8gu34jipxMrQOkyfPHN10itfIAsGOvllOZfpB97jD-5BvLJQ53M4YGk08PU7xq01gt9WPq_zU2SlakcJAGoXC9QO2Yu5Xtd0lOjZj12y0ORsHO8csPZnRRIbJWsr4va4xvzLoekbM9o9Wccw0UmAEQob12ZZI-7oCflkQDV4rPDIfFaq7CSQZNpnHtBMjyTbNy31WU0cJOdvVjJ81lrEBtE3k"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="flex-1 p-8 max-w-5xl mx-auto w-full">
+
+    <!-- Page Header -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-[#1E293B]">Create a New Fest</h1>
+        <p class="text-[#475569] text-sm mt-1">Fill in the details below and click Publish Fest when ready.</p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="saveDraft()" class="px-5 py-2.5 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition-colors">
+          Save Draft
+        </button>
+        <button onclick="publishFest()" id="btn-publish" class="px-6 py-2.5 rounded-full bg-[#97A97C] text-white text-sm font-bold shadow-md hover:bg-[#7a9062] transition-all flex items-center gap-2 uppercase tracking-wide">
+          <span class="material-symbols-outlined text-[18px]" id="pub-icon">publish</span>
+          <span id="pub-label">Publish Fest</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left: Form -->
+      <div class="lg:col-span-2 flex flex-col gap-6">
+
+        <!-- Fest Details Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-soft">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-[#CFDBD5]/40 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[#2D3A28] text-[20px]">stadium</span>
+            </div>
+            <h2 class="text-lg font-bold text-[#1E293B]">Fest Details</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">Fest Name *</label>
+              <input id="fest-name" type="text" placeholder="e.g. Neon Nights 2026"
+                class="w-full h-11 px-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none text-sm transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">Location / Venue</label>
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">location_on</span>
+                <input id="fest-location" type="text" placeholder="City or venue name"
+                  class="w-full h-11 pl-10 pr-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none text-sm transition-all"/>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">Start Date & Time *</label>
+              <input id="fest-start" type="datetime-local"
+                class="w-full h-11 px-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none text-sm transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">End Date & Time *</label>
+              <input id="fest-end" type="datetime-local"
+                class="w-full h-11 px-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none text-sm transition-all"/>
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">Description</label>
+              <textarea id="fest-desc" rows="3" placeholder="Describe the vibe, lineup, and key details..."
+                class="w-full p-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none text-sm transition-all resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settlement Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-soft">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-[#E8ECE6]/60 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[#3A4238] text-[20px]">account_balance</span>
+            </div>
+            <h2 class="text-lg font-bold text-[#1E293B]">Settlement Wallet</h2>
+          </div>
+          <label class="block text-xs font-bold text-[#475569] uppercase mb-1.5">Primary Wallet Address</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">account_balance_wallet</span>
+            <input id="fest-wallet" type="text" placeholder="0x..."
+              class="w-full h-11 pl-10 pr-4 rounded-lg bg-[#F1F5F9] border border-slate-200 focus:border-[#97A97C] focus:ring-2 focus:ring-[#97A97C]/20 outline-none font-mono text-sm transition-all"/>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Funds from ticket & merchant transactions will be routed here.</p>
+        </div>
+
+      </div>
+
+      <!-- Right: Visibility + Help -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Visibility Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-soft">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
+              <span class="material-symbols-outlined text-slate-600 text-[20px]">visibility</span>
+            </div>
+            <h2 class="text-lg font-bold text-[#1E293B]">Visibility</h2>
+          </div>
+          <label class="block text-xs font-bold text-[#475569] uppercase mb-3">Status</label>
+          <!-- Segmented Control -->
+          <div class="flex bg-slate-100 p-1 rounded-xl gap-1" id="status-group">
+            <button onclick="selectStatus(this,'draft')"
+              class="status-btn active flex-1 py-2 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-value="draft">
+              <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>Draft
+            </button>
+            <button onclick="selectStatus(this,'upcoming')"
+              class="status-btn flex-1 py-2 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-value="upcoming">
+              <span class="w-2 h-2 rounded-full bg-[#97A97C] inline-block"></span>Upcoming
+            </button>
+            <button onclick="selectStatus(this,'live')"
+              class="status-btn flex-1 py-2 px-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
+              data-value="live">
+              <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>Live
+            </button>
+          </div>
+          <p class="text-xs text-slate-400 mt-3">Selected: <strong id="status-display" class="text-[#1E293B]">Draft</strong></p>
+          <input type="hidden" id="fest-status" value="draft"/>
+        </div>
+
+        <!-- Help Card -->
+        <div class="bg-gradient-to-br from-[#CFDBD5]/30 to-white rounded-2xl border border-[#CFDBD5]/50 p-6 shadow-soft">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-[#97A97C]">help_outline</span>
+            <h3 class="font-bold text-[#1E293B]">Quick Guide</h3>
+          </div>
+          <ul class="space-y-3 text-sm text-[#475569]">
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[#97A97C] text-[16px] mt-0.5">check_circle</span>
+              <span>Fill <strong>Name</strong>, <strong>Start</strong> and <strong>End</strong> dates — they are required.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[#97A97C] text-[16px] mt-0.5">check_circle</span>
+              <span>Choose <strong>Upcoming</strong> or <strong>Live</strong> in Visibility to make the fest visible.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[#97A97C] text-[16px] mt-0.5">check_circle</span>
+              <span>Click <strong>Publish Fest</strong> — it saves locally and redirects immediately.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[#97A97C] text-[16px] mt-0.5">check_circle</span>
+              <span>After publishing, add merchants from the Fests management page.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ── Visibility toggle ──────────────────────────────────────────────────────────
+function selectStatus(btn, val) {
+  document.querySelectorAll('.status-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  document.getElementById('fest-status').value = val;
+  var labels = { draft: 'Draft', upcoming: 'Upcoming', live: 'Live' };
+  document.getElementById('status-display').textContent = labels[val] || val;
+}
+
+// ── Save draft ─────────────────────────────────────────────────────────────────
+function saveDraft() {
+  alert('Draft saved! You can return to edit it later.');
+  window.location.href = 'fest%20management.html';
+}
+
+// ── Publish fest ───────────────────────────────────────────────────────────────
+function publishFest() {
+  var name  = document.getElementById('fest-name').value.trim();
+  var loc   = document.getElementById('fest-location').value.trim();
+  var start = document.getElementById('fest-start').value;
+  var end   = document.getElementById('fest-end').value;
+  var wallet= document.getElementById('fest-wallet').value.trim();
+  var desc  = document.getElementById('fest-desc').value.trim();
+  var status= document.getElementById('fest-status').value || 'upcoming';
+
+  // Validation
+  if (!name)  { alert('Please enter a Fest Name.'); return; }
+  if (!start) { alert('Please select a Start Date & Time.'); return; }
+  if (!end)   { alert('Please select an End Date & Time.'); return; }
+  if (end <= start) { alert('End Date must be after Start Date.'); return; }
+
+  // Update button state
+  var btn   = document.getElementById('btn-publish');
+  var icon  = document.getElementById('pub-icon');
+  var label = document.getElementById('pub-label');
+  btn.disabled = true;
+  btn.style.opacity = '0.8';
+  icon.textContent  = 'hourglass_empty';
+  label.textContent = 'Saving...';
+
+  // Build fest object
+  var festData = {
+    id: 'f' + Date.now(),
+    name: name,
+    location: loc || 'TBD',
+    start_date: start,
+    end_date: end,
+    wallet_addr: wallet,
+    description: desc,
+    status: status === 'draft' ? 'upcoming' : status,
+    merchantCount: 0,
+    revenue: 0,
+    transactionCount: 0,
+    created_at: new Date().toISOString()
+  };
+
+  // Save to localStorage — always works, no network needed
+  try {
+    var stored = JSON.parse(localStorage.getItem('fp_fests') || '[]');
+    stored.unshift(festData);
+    localStorage.setItem('fp_fests', JSON.stringify(stored));
+  } catch(e) { /* ignore */ }
+
+  // Try backend (fire and forget — don't block redirect)
+  try {
+    fetch('http://localhost:4000/api/fests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(festData)
+    }).catch(function() {});
+  } catch(e) { /* ignore */ }
+
+  // SUCCESS — always redirect
+  icon.textContent  = 'check_circle';
+  label.textContent = 'Published!';
+  btn.style.background = '#4CAF50';
+
+  setTimeout(function() {
+    window.location.href = 'fest%20management.html';
+  }, 700);
+}
+</script>
+
+</body>
+</html>

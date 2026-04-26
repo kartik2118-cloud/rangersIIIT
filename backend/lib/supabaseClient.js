@@ -20,21 +20,28 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     "Add credentials to backend/.env to enable live data."
   );
   // Return a stub so the server boots without crashing
-  module.exports = {
-    from: () => ({
-      select:  () => ({ data: [], error: null, count: 0 }),
-      insert:  () => ({ data: null, error: { message: "No Supabase credentials" } }),
-      update:  () => ({ data: null, error: { message: "No Supabase credentials" } }),
-      eq:      function() { return this; },
-      ilike:   function() { return this; },
-      gte:     function() { return this; },
-      order:   function() { return this; },
-      range:   function() { return this; },
-      single:  function() { return this; },
-      or:      function() { return this; },
-    }),
-  };
-  return;
+    module.exports = {
+      from: () => {
+        const chainable = {
+          select:  function() { return this; },
+          insert:  function() { return this; },
+          update:  function() { return this; },
+          eq:      function() { return this; },
+          ilike:   function() { return this; },
+          gte:     function() { return this; },
+          order:   function() { return this; },
+          range:   function() { return this; },
+          single:  function() { return this; },
+          or:      function() { return this; },
+          // Awaitable promise interface
+          then: function(resolve) {
+            resolve({ data: [], error: { message: "No Supabase credentials" } });
+          }
+        };
+        return chainable;
+      },
+    };
+    return;
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
