@@ -48,6 +48,7 @@ function LoginForm() {
 
     try {
       // 1. Authenticate with Firebase Google Provider
+      if (!auth || !googleProvider) throw new Error('Firebase not initialized.');
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
