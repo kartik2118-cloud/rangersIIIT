@@ -199,6 +199,17 @@ export default function PayPage() {
             <p className="pay-success-detail">{qr?.amount} FEST paid to {merchant?.name}</p>
             <p className="pay-success-detail">{fest?.name} · {fest?.campus}</p>
             <div className="pay-success-hash">{txHash}</div>
+            
+            <div style={{ background: 'var(--surface)', padding: '16px', borderRadius: 'var(--radius)', border: '1px solid var(--border)', display: 'inline-block', margin: '16px 0 24px' }}>
+              <img 
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${txHash}-${merchant?.id}`} 
+                alt="Confirmation QR Code" 
+                style={{ display: 'block', margin: '0 auto', borderRadius: '4px' }}
+              />
+              <p style={{ fontSize: '12px', color: 'var(--text-2)', marginTop: '12px', marginBottom: 0, fontWeight: 500 }}>
+                Scan for entry / pickup
+              </p>
+            </div>
             <p style={{ fontSize: '13px', color: 'var(--text-2)', marginBottom: '24px' }}>
               New balance: <strong>{newBalance} FEST</strong>
             </p>

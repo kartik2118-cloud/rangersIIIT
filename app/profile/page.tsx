@@ -24,9 +24,12 @@ export default function ProfilePage() {
 
   useEffect(() => {
     fetch('/api/auth/me')
-      .then(r => { if (r.status === 401) throw new Error('auth'); return r.json(); })
+      .then(r => r.json())
       .then(me => {
-        if (!me.success || !me.user) throw new Error('auth');
+        if (!me.success || !me.user) {
+          setLoading(false);
+          return;
+        }
         setUser(me.user);
         // Fetch wallet and transactions in parallel
         return Promise.all([
@@ -34,16 +37,14 @@ export default function ProfilePage() {
           fetch('/api/transactions').then(r => r.json()).catch(() => ({ success: false, data: [] })),
         ]);
       })
-      .then(([w, t]) => {
+      .then((res) => {
+        if (!res) return;
+        const [w, t] = res;
         if (w.success) setWallet(w.data);
         if (t.success) setTxCount(t.data?.length || 0);
         setLoading(false);
       })
-      .catch((err) => {
-        if (err.message === 'auth') {
-          router.push('/login');
-          return;
-        }
+      .catch(() => {
         setLoading(false);
       });
   }, [router]);
