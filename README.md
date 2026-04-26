@@ -41,7 +41,7 @@ If you are a developer and want to run this app on your own computer, follow the
 Open your terminal and clone the repository:
 ```bash
 git clone https://github.com/kartik2118-cloud/rangersIIIT.git
-cd festpass
+cd rangersIIIT
 ```
 
 ### 2. Install Requirements
@@ -63,7 +63,7 @@ Run the server:
 ```bash
 npm run dev
 ```
-Now, open your web browser and go to **[http://localhost:3000](http://localhost:3000)** to see the app!
+Now, open your web browser and go to **[http://localhost:4000](http://localhost:4000)** to see the app!
 
 ---
 
